@@ -194,7 +194,7 @@ int main(void)
        
     SysTick_Config(SystemCoreClock/500);//interrupt system 2ms
     GPIO_SetBits(GPIOB,GPIO_Pin_12);
-		//anh Huan
+		//anh Huan_code GPS
 		gps_init(460800);
     while(1)
     {
