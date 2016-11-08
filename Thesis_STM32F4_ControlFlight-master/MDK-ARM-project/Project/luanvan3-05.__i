@@ -1,0 +1,4 @@
+-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\file.c -I..\file.h -I..\filestmf405.c -I..\lib\inc -I..\lib 
+-I C:\Keil\ARM\RV31\INC 
+-I C:\Keil\ARM\CMSIS\Include 
+-DHSE_VALUE="8000000" -DUSE_STDPERIPH_DRIVER -o ".\Project\luanvan3-05.o" --omf_browse ".\Project\luanvan3-05.crf" --depend ".\Project\luanvan3-05.d" "..\filestmf405.c\luanvan3-05.c"

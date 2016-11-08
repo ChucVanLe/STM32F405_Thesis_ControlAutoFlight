@@ -1,0 +1,4 @@
+-c --cpu Cortex-M4.fp -D__EVAL -g -O3 --apcs=interwork --split_sections -I..\lib\inc -I..\lib -I..\file.c -I..\file.h 
+-I C:\Keil\ARM\RV31\INC 
+-I C:\Keil\ARM\CMSIS\Include 
+-DHSE_VALUE="8000000" -DUSE_STDPERIPH_DRIVER -o ".\Project\diskio1.o" --omf_browse ".\Project\diskio1.crf" --depend ".\Project\diskio1.d" "..\file.c\diskio1.c"

@@ -1,0 +1,168 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+F:\Tan_Project\may bay-coppy-new5.4-dung cho mach moi 20mhz\MDK-ARM\crc.uvproj
+Project File Date:  12/09/2014
+
+<h2>Output:</h2>
+Build target 'CRC'
+compiling peripheral05.c...
+compiling luanvan3-05vs2.c...
+linking...
+Program Size: Code=23972 RO-data=1952 RW-data=124 ZI-data=27940  
+".\Project\crc.axf" - 0 Errors, 0 Warning(s).
+Build target 'CRC'
+compiling peripheral05.c...
+compiling pid05.c...
+..\filestmf405.c\pid05.c(169): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\filestmf405.c\pid05.c(177): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\filestmf405.c\pid05.c(185): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\filestmf405.c\pid05.c(224): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\filestmf405.c\pid05.c(225): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\filestmf405.c\pid05.c(269): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\filestmf405.c\pid05.c(270): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\filestmf405.c\pid05.c(312): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\filestmf405.c\pid05.c(313): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\filestmf405.c\pid05.c(343): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\filestmf405.c\pid05.c(344): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\filestmf405.c\pid05.c(388): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\filestmf405.c\pid05.c(389): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+linking...
+Program Size: Code=23988 RO-data=1952 RW-data=124 ZI-data=27940  
+".\Project\crc.axf" - 0 Errors, 13 Warning(s).
+Build target 'CRC'
+linking...
+Program Size: Code=23988 RO-data=1952 RW-data=124 ZI-data=27940  
+".\Project\crc.axf" - 0 Errors, 0 Warning(s).
+Load "F:\\Tan_Project\\may bay-coppy-new5.4-dung cho mach moi 20mhz\\MDK-ARM\\Project\\crc.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+Build target 'CRC'
+compiling luanvan3-05vs2.c...
+linking...
+Program Size: Code=23996 RO-data=1952 RW-data=124 ZI-data=27940  
+".\Project\crc.axf" - 0 Errors, 0 Warning(s).
+Load "F:\\Tan_Project\\may bay-coppy-new5.4-dung cho mach moi 20mhz\\MDK-ARM\\Project\\crc.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+Build target 'CRC'
+compiling luanvan3-05vs2.c...
+linking...
+Program Size: Code=24004 RO-data=1952 RW-data=124 ZI-data=27940  
+".\Project\crc.axf" - 0 Errors, 0 Warning(s).
+Load "F:\\Tan_Project\\may bay-coppy-new5.4-dung cho mach moi 20mhz\\MDK-ARM\\Project\\crc.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+Build target 'CRC'
+compiling luanvan3-05vs2.c...
+linking...
+Program Size: Code=23988 RO-data=1952 RW-data=124 ZI-data=27940  
+".\Project\crc.axf" - 0 Errors, 0 Warning(s).
+Load "F:\\Tan_Project\\may bay-coppy-new5.4-dung cho mach moi 20mhz\\MDK-ARM\\Project\\crc.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+Build target 'CRC'
+compiling luanvan3-05vs2.c...
+linking...
+Program Size: Code=23988 RO-data=1952 RW-data=124 ZI-data=27940  
+".\Project\crc.axf" - 0 Errors, 0 Warning(s).
+Load "F:\\Tan_Project\\may bay-coppy-new5.4-dung cho mach moi 20mhz\\MDK-ARM\\Project\\crc.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+Build target 'CRC'
+compiling luanvan3-05vs2.c...
+linking...
+Program Size: Code=23988 RO-data=1952 RW-data=124 ZI-data=27940  
+".\Project\crc.axf" - 0 Errors, 0 Warning(s).
+Load "F:\\Tan_Project\\may bay-coppy-new5.4-dung cho mach moi 20mhz\\MDK-ARM\\Project\\crc.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+Build target 'CRC'
+compiling luanvan3-05vs2.c...
+linking...
+Program Size: Code=23956 RO-data=1952 RW-data=128 ZI-data=27944  
+".\Project\crc.axf" - 0 Errors, 0 Warning(s).
+Load "F:\\Tan_Project\\may bay-coppy-new5.4-dung cho mach moi 20mhz\\MDK-ARM\\Project\\crc.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+Build target 'CRC'
+compiling luanvan3-05vs2.c...
+linking...
+Program Size: Code=23956 RO-data=1952 RW-data=128 ZI-data=27944  
+".\Project\crc.axf" - 0 Errors, 0 Warning(s).
+Load "F:\\Tan_Project\\may bay-coppy-new5.4-dung cho mach moi 20mhz\\MDK-ARM\\Project\\crc.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+Build target 'CRC'
+compiling peripheral05.c...
+compiling luanvan3-05vs2.c...
+linking...
+Program Size: Code=23972 RO-data=1952 RW-data=128 ZI-data=27944  
+".\Project\crc.axf" - 0 Errors, 0 Warning(s).
+Load "F:\\Tan_Project\\may bay-coppy-new5.4-dung cho mach moi 20mhz\\MDK-ARM\\Project\\crc.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+Build target 'CRC'
+compiling luanvan3-05vs2.c...
+linking...
+Program Size: Code=23988 RO-data=1952 RW-data=128 ZI-data=27944  
+".\Project\crc.axf" - 0 Errors, 0 Warning(s).
+Load "F:\\Tan_Project\\may bay-coppy-new5.4-dung cho mach moi 20mhz\\MDK-ARM\\Project\\crc.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+Build target 'CRC'
+compiling luanvan3-05vs2.c...
+linking...
+Program Size: Code=24004 RO-data=1952 RW-data=128 ZI-data=27944  
+".\Project\crc.axf" - 0 Errors, 0 Warning(s).
+Load "F:\\Tan_Project\\may bay-coppy-new5.4-dung cho mach moi 20mhz\\MDK-ARM\\Project\\crc.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+Build target 'CRC'
+compiling luanvan3-05vs2.c...
+linking...
+Program Size: Code=24004 RO-data=1952 RW-data=128 ZI-data=27944  
+".\Project\crc.axf" - 0 Errors, 0 Warning(s).
+Build target 'CRC'
+compiling luanvan3-05vs2.c...
+linking...
+Program Size: Code=24036 RO-data=1952 RW-data=128 ZI-data=27944  
+".\Project\crc.axf" - 0 Errors, 0 Warning(s).
+Load "F:\\Tan_Project\\may bay-coppy-new5.4-dung cho mach moi 20mhz\\MDK-ARM\\Project\\crc.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+Build target 'CRC'
+linking...
+Program Size: Code=24036 RO-data=1952 RW-data=128 ZI-data=27944  
+".\Project\crc.axf" - 0 Errors, 0 Warning(s).
+Load "F:\\Tan_Project\\may bay-coppy-new5.4-dung cho mach moi 20mhz\\MDK-ARM\\Project\\crc.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...

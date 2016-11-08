@@ -1,0 +1,4 @@
+-c --cpu Cortex-M4.fp -D__EVAL -g -O3 --apcs=interwork --split_sections -I..\file.h -I..\lib\inc -I..\lib 
+-I C:\Keil\ARM\RV31\INC 
+-I C:\Keil\ARM\CMSIS\Include 
+-DHSE_VALUE="8000000" -DUSE_STDPERIPH_DRIVER -o ".\Project\thucode.o" --omf_browse ".\Project\thucode.crf" --depend ".\Project\thucode.d" "..\thucode.c"

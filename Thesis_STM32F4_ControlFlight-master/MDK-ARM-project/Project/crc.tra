@@ -1,0 +1,39 @@
+*** Creating Trace Output File '.\Project\crc.tra' Ok.
+### Preparing for ADS-LD.
+### Creating ADS-LD Command Line
+### List of Objects: adding '".\project\startup_stm32f4xx.o"'
+### List of Objects: adding '".\project\system_stm32f4xx.o"'
+### List of Objects: adding '".\project\misc.o"'
+### List of Objects: adding '".\project\stm32f4xx_dma.o"'
+### List of Objects: adding '".\project\stm32f4xx_exti.o"'
+### List of Objects: adding '".\project\stm32f4xx_flash.o"'
+### List of Objects: adding '".\project\stm32f4xx_gpio.o"'
+### List of Objects: adding '".\project\stm32f4xx_rcc.o"'
+### List of Objects: adding '".\project\stm32f4xx_spi.o"'
+### List of Objects: adding '".\project\stm32f4xx_tim.o"'
+### List of Objects: adding '".\project\stm32f4xx_usart.o"'
+### List of Objects: adding '".\project\stm32f4xx_syscfg.o"'
+### List of Objects: adding '".\project\diskio05.o"'
+### List of Objects: adding '".\project\peripheral05.o"'
+### List of Objects: adding '".\project\pid05.o"'
+### List of Objects: adding '".\project\powersd05.o"'
+### List of Objects: adding '".\project\luanvan3-05vs2.o"'
+### List of Objects: adding '".\project\fattime.o"'
+### List of Objects: adding '".\project\ff.o"'
+### List of Objects: adding '".\project\ccsbcs.o"'
+### ADS-LD Command completed:
+--cpu Cortex-M4.fp ".\project\startup_stm32f4xx.o" ".\project\system_stm32f4xx.o" ".\project\misc.o" ".\project\stm32f4xx_dma.o" ".\project\stm32f4xx_exti.o" ".\project\stm32f4xx_flash.o" ".\project\stm32f4xx_gpio.o" ".\project\stm32f4xx_rcc.o" ".\project\stm32f4xx_spi.o" ".\project\stm32f4xx_tim.o" ".\project\stm32f4xx_usart.o" ".\project\stm32f4xx_syscfg.o" ".\project\diskio05.o" ".\project\peripheral05.o" ".\project\pid05.o" ".\project\powersd05.o" ".\project\luanvan3-05vs2.o" ".\project\fattime.o" ".\project\ff.o" ".\project\ccsbcs.o" 
+--library_type=microlib --strict --scatter ".\Project\crc.sct" 
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols 
+--info sizes --info totals --info unused --info veneers 
+ --list ".\Project\crc.map" -o .\Project\crc.axf### Preparing Environment (PrepEnvAds)
+### ADS-LD Output File: '.\Project\crc.axf'
+### ADS-LD Command File: '.\Project\crc.lnp'
+### Checking for dirty Components...
+### Creating CmdFile '.\Project\crc.lnp', Handle=0x0000059C
+### Writing '.lnp' file
+### ADS-LD Command file '.\Project\crc.lnp' is ready.
+### ADS-LD: About to start ADS-LD Thread.
+### ADS-LD: executed with 0 errors
+### Updating obj list
+### LDADS_file() completed.

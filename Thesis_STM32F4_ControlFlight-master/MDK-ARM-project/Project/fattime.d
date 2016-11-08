@@ -1,0 +1,39 @@
+.\project\fattime.o: ..\Sd Card\fattime.c
+.\project\fattime.o: ..\Sd Card\integer.h
+.\project\fattime.o: ..\lib\stm32f4xx.h
+.\project\fattime.o: C:\Keil_v5\ARM\CMSIS\Include\core_cm4.h
+.\project\fattime.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\project\fattime.o: C:\Keil_v5\ARM\CMSIS\Include\core_cmInstr.h
+.\project\fattime.o: C:\Keil_v5\ARM\CMSIS\Include\core_cmFunc.h
+.\project\fattime.o: C:\Keil_v5\ARM\CMSIS\Include\core_cm4_simd.h
+.\project\fattime.o: ..\lib\system_stm32f4xx.h
+.\project\fattime.o: ..\lib\stm32f4xx_conf.h
+.\project\fattime.o: ..\lib\inc\stm32f4xx_adc.h
+.\project\fattime.o: ..\lib\stm32f4xx.h
+.\project\fattime.o: ..\lib\inc\stm32f4xx_can.h
+.\project\fattime.o: ..\lib\inc\stm32f4xx_crc.h
+.\project\fattime.o: ..\lib\inc\stm32f4xx_cryp.h
+.\project\fattime.o: ..\lib\inc\stm32f4xx_dac.h
+.\project\fattime.o: ..\lib\inc\stm32f4xx_dbgmcu.h
+.\project\fattime.o: ..\lib\inc\stm32f4xx_dcmi.h
+.\project\fattime.o: ..\lib\inc\stm32f4xx_dma.h
+.\project\fattime.o: ..\lib\inc\stm32f4xx_exti.h
+.\project\fattime.o: ..\lib\inc\stm32f4xx_flash.h
+.\project\fattime.o: ..\lib\inc\stm32f4xx_fsmc.h
+.\project\fattime.o: ..\lib\inc\stm32f4xx_hash.h
+.\project\fattime.o: ..\lib\inc\stm32f4xx_gpio.h
+.\project\fattime.o: ..\lib\inc\stm32f4xx_i2c.h
+.\project\fattime.o: ..\lib\inc\stm32f4xx_iwdg.h
+.\project\fattime.o: ..\lib\inc\stm32f4xx_pwr.h
+.\project\fattime.o: ..\lib\inc\stm32f4xx_rcc.h
+.\project\fattime.o: ..\lib\inc\stm32f4xx_rng.h
+.\project\fattime.o: ..\lib\inc\stm32f4xx_rtc.h
+.\project\fattime.o: ..\lib\inc\stm32f4xx_sdio.h
+.\project\fattime.o: ..\lib\inc\stm32f4xx_spi.h
+.\project\fattime.o: ..\lib\inc\stm32f4xx_syscfg.h
+.\project\fattime.o: ..\lib\inc\stm32f4xx_tim.h
+.\project\fattime.o: ..\lib\inc\stm32f4xx_usart.h
+.\project\fattime.o: ..\lib\inc\stm32f4xx_wwdg.h
+.\project\fattime.o: ..\lib\inc\misc.h
+.\project\fattime.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\project\fattime.o: ..\Sd Card\fattime.h
