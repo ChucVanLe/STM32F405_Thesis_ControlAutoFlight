@@ -46,3 +46,8 @@
 .\project\pid05.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\project\pid05.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\project\pid05.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\project\pid05.o: ..\file.h\core.h
+.\project\pid05.o: ..\file.h\project.h
+.\project\pid05.o: ..\file.h\def.h
+.\project\pid05.o: ..\file.h\LL2UTM.h
+.\project\pid05.o: ..\file.h\def.h

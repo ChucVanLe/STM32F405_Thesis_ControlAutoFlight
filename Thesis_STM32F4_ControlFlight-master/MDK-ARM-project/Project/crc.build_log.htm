@@ -22,16 +22,41 @@ Dialog DLL:      TCM.DLL V1.14.14.0
  
 <h2>Project:</h2>
 D:\LeVanChuc\OneDrive\Le Van Chuc\code\Thesis_STM32F4_ControlFlight-master_v2\Thesis_STM32F4_ControlFlight-master\MDK-ARM-project\crc.uvproj
-Project File Date:  11/04/2016
+Project File Date:  11/09/2016
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 3 (build 300)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'CRC'
-compiling luanvan3-05vs2.c...
+compiling core.c...
+..\file.h\LL2UTM.h(18): warning:  #1-D: last line of file ends without a newline
+   
+..\filestmf405.c\core.c(36): warning:  #1215-D: #warning directive: check K_STEER
+  #warning check K_STEER
+..\filestmf405.c\core.c(259): warning:  #1215-D: #warning directive: check wpx==0
+  	#warning check wpx==0
+..\filestmf405.c\core.c(183): warning:  #550-D: variable "wpxy" was set but never used
+  static real64_t wpx1, wpx2, wpy1, wpy2, wpx, wpy, wpxy, inv_dist_wp, slope, m, c;	
+..\filestmf405.c\core.c(183): warning:  #550-D: variable "inv_dist_wp" was set but never used
+  static real64_t wpx1, wpx2, wpy1, wpy2, wpx, wpy, wpxy, inv_dist_wp, slope, m, c;	
+..\filestmf405.c\core.c(183): warning:  #550-D: variable "slope" was set but never used
+  static real64_t wpx1, wpx2, wpy1, wpy2, wpx, wpy, wpxy, inv_dist_wp, slope, m, c;	
+..\filestmf405.c\core.c(184): warning:  #177-D: variable "debug_msg" was declared but never referenced
+  static char debug_msg[200];																					
+y converted to double-precision
+  	else if (tmp > 1.0*
+I)
+..\filestmf405.c\core.c(472): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  		tmp = tmp - 2.0*
+I;
+..\filestmf405.c\core.c(523): warning:  #167-D: argument of type "volatile real64_t *" is incompatible with parameter of type "double *"
+  										&yp, &xp, &UTMLetter);			
+..\filestmf405.c\core.c(523): warning:  #167-D: argument of type "volatile real64_t *" is incompatible with parameter of type "double *"
+  										&yp, &xp, &UTMLetter);			
+..\filestmf405.c\core.c: 17 warnings, 0 errors
 linking...
-Program Size: Code=10132 RO-data=560 RW-data=92 ZI-data=27084  
-".\Project\crc.axf" - 0 Error(s), 0 Warning(s).
-Build Time Elapsed:  00:00:06
+Program Size: Code=23288 RO-data=1088 RW-data=516 ZI-data=27076  
+".\Project\crc.axf" - 0 Error(s), 10 Warning(s).
+Build Time Elapsed:  00:00:05
 </pre>
 </body>
 </html>

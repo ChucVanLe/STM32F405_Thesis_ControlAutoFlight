@@ -528,6 +528,16 @@
               <FileType>1</FileType>
               <FilePath>..\filestmf405.c\luanvan3-05vs2.c</FilePath>
             </File>
+            <File>
+              <FileName>core.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\filestmf405.c\core.c</FilePath>
+            </File>
+            <File>
+              <FileName>LL2UTM.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\filestmf405.c\LL2UTM.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

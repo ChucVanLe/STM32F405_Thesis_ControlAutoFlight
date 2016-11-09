@@ -46,3 +46,8 @@
 .\project\peripheral05.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\project\peripheral05.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\project\peripheral05.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\project\peripheral05.o: ..\file.h\core.h
+.\project\peripheral05.o: ..\file.h\project.h
+.\project\peripheral05.o: ..\file.h\def.h
+.\project\peripheral05.o: ..\file.h\LL2UTM.h
+.\project\peripheral05.o: ..\file.h\def.h

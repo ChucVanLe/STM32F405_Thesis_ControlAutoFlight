@@ -34,6 +34,12 @@
 #include <string.h>
 #include <stdlib.h>
 #include "math.h"
+#include "core.h"
+#include "def.h"
+
+#include "LL2UTM.h"
+extern GPS_STRUCT GPSStruct;
+extern IMU_STRUCT IMUStruct;
 /**************************************Function***************************************************/
 #define Max_Xung 30
 /*****************************Function CRC calculator*********************************************/

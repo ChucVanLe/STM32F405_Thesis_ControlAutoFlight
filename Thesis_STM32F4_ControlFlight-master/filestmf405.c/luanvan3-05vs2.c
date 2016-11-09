@@ -26,6 +26,7 @@
  *
 ******************************************************************************/
 #include "project.h"
+
 /**************************************************************************************/
 
 /**************************************************************************************/
@@ -74,34 +75,7 @@ float test_simulate1, test_simulate2, test_simulate3;
 #define GPS_RX_DMA_STREAM     DMA1_Stream5
  /* 							    GLOBAL VARIABLE                               */
 /******************************************************************************/
-typedef enum
-{
-    GPS_QA_NOT_FIX   = (uint8_t)0,
-    GPS_QA_FIX       = (uint8_t)1,
-    GPS_QA_D_FIX     = (uint8_t)2,
-    GPS_QA_RTK_INT   = (uint8_t)4,
-    GPS_QA_RTK_FLOAT = (uint8_t)5,
-    GPS_QA_EST       = (uint8_t)6
-}GPS_QA;
-typedef struct 
-{
-    BOOL isavailable; //True: received GPS string
-    BOOL isready; // True: received new valid gps tring, used as trigger 100ms for controller
-    GPS_QA quality; // 4: RTK fixed
-    float latitude;
-    float longitude;
-    float speed;
-    float heading;
-		float altitude;
-}GPS_STRUCT;
 
-typedef struct
-{
-    BOOL isavailable;
-    float roll;
-    float pitch;
-    float yaw;
-}IMU_STRUCT;
 GPS_STRUCT GPSStruct;
 IMU_STRUCT IMUStruct;
 
@@ -218,7 +192,7 @@ int main(void)
 		//---------------------receive data from GS-------------------------------------
 		if(CMD_Trigger) //receive enough 1 frame
 		{//if CMD_Trigger = 1 ; receive data from ground station 
-				//receive_data_and_reply(&data_from_pc[0]);
+				receive_data_and_reply(&data_from_pc[0]);
 				
 				//reset data buffer
 				CMD_Trigger = false;
@@ -228,7 +202,7 @@ int main(void)
 		else//update code data IMU 10ms, data GPS 100ms	
 			//Anh Huan....................................................
 			gps_process();
-			
+			main_control();
 
 //...........................	remove code save data because Mr.Huan has done it.				        
     }// end while
@@ -333,19 +307,19 @@ void receive_data_and_reply(char *buffer)
 			Roll_PID.SetPoint = atof(temp_setpoint);
 			Update_heso_Roll=1;
 			//send reply to GS
-      Buf_USART2[0] = '!';
-      Buf_USART2[1] = buffer[1];
-      Buf_USART2[2] = 6;//ACK
-      Buf_USART2[3] = '@';
+      data_IMU_GPS_tran_GS[0] = '!';
+      data_IMU_GPS_tran_GS[1] = buffer[1];
+      data_IMU_GPS_tran_GS[2] = 6;//ACK
+      data_IMU_GPS_tran_GS[3] = '@';
 			DMA_SetCurrDataCounter(DMA1_Stream4,4);
       DMA_Cmd(DMA1_Stream4,ENABLE);
 		}
 		else
 		{
-			Buf_USART2[0] = '!';
-      Buf_USART2[1] = buffer[1];
-      Buf_USART2[2] = 21;//NAK
-      Buf_USART2[3] = '@';
+			data_IMU_GPS_tran_GS[0] = '!';
+      data_IMU_GPS_tran_GS[1] = buffer[1];
+      data_IMU_GPS_tran_GS[2] = 21;//NAK
+      data_IMU_GPS_tran_GS[3] = '@';
 			DMA_SetCurrDataCounter(DMA1_Stream4,4);
       DMA_Cmd(DMA1_Stream4,ENABLE);
 		}
@@ -370,19 +344,19 @@ void receive_data_and_reply(char *buffer)
 			Pitch_PID.SetPoint = atof(temp_setpoint);
 			Update_heso_Pitch=1;
 			//send reply to GS
-      Buf_USART2[0] = '!';
-      Buf_USART2[1] = buffer[1];
-      Buf_USART2[2] = 6;//ACK
-      Buf_USART2[3] = '@';
+      data_IMU_GPS_tran_GS[0] = '!';
+      data_IMU_GPS_tran_GS[1] = buffer[1];
+      data_IMU_GPS_tran_GS[2] = 6;//ACK
+      data_IMU_GPS_tran_GS[3] = '@';
 			DMA_SetCurrDataCounter(DMA1_Stream4,4);
       DMA_Cmd(DMA1_Stream4,ENABLE);
 		}
 		else
 		{
-			Buf_USART2[0] = '!';
-      Buf_USART2[1] = buffer[1];
-      Buf_USART2[2] = 21;//NAK
-      Buf_USART2[3] = '@';
+			data_IMU_GPS_tran_GS[0] = '!';
+      data_IMU_GPS_tran_GS[1] = buffer[1];
+      data_IMU_GPS_tran_GS[2] = 21;//NAK
+      data_IMU_GPS_tran_GS[3] = '@';
 			DMA_SetCurrDataCounter(DMA1_Stream4,4);
       DMA_Cmd(DMA1_Stream4,ENABLE);
 		}
@@ -406,19 +380,19 @@ void receive_data_and_reply(char *buffer)
 			Yaw_PID.SetPoint = atof(temp_setpoint);
 			Update_heso_Yaw=1;
 			//send reply to GS
-      Buf_USART2[0] = '!';
-      Buf_USART2[1] = buffer[1];
-      Buf_USART2[2] = 6;//ACK
-      Buf_USART2[3] = '@';
+      data_IMU_GPS_tran_GS[0] = '!';
+      data_IMU_GPS_tran_GS[1] = buffer[1];
+      data_IMU_GPS_tran_GS[2] = 6;//ACK
+      data_IMU_GPS_tran_GS[3] = '@';
 			DMA_SetCurrDataCounter(DMA1_Stream4,4);
       DMA_Cmd(DMA1_Stream4,ENABLE);
 		}
 		else
 		{
-			Buf_USART2[0] = '!';
-      Buf_USART2[1] = buffer[1];
-      Buf_USART2[2] = 21;//NAK
-      Buf_USART2[3] = '@';
+			data_IMU_GPS_tran_GS[0] = '!';
+      data_IMU_GPS_tran_GS[1] = buffer[1];
+      data_IMU_GPS_tran_GS[2] = 21;//NAK
+      data_IMU_GPS_tran_GS[3] = '@';
 			DMA_SetCurrDataCounter(DMA1_Stream4,4);
       DMA_Cmd(DMA1_Stream4,ENABLE);
 		}
@@ -442,19 +416,19 @@ void receive_data_and_reply(char *buffer)
 			Alt_PID.SetPoint = atof(temp_setpoint);
 			Update_heso_Alt=1;
 			//send reply to GS
-      Buf_USART2[0] = '!';
-      Buf_USART2[1] = buffer[1];
-      Buf_USART2[2] = 6;//ACK
-      Buf_USART2[3] = '@';
+      data_IMU_GPS_tran_GS[0] = '!';
+      data_IMU_GPS_tran_GS[1] = buffer[1];
+      data_IMU_GPS_tran_GS[2] = 6;//ACK
+      data_IMU_GPS_tran_GS[3] = '@';
 			DMA_SetCurrDataCounter(DMA1_Stream4,4);
       DMA_Cmd(DMA1_Stream4,ENABLE);
 		}
 		else
 		{
-			Buf_USART2[0] = '!';
-      Buf_USART2[1] = buffer[1];
-      Buf_USART2[2] = 21;//NAK
-      Buf_USART2[3] = '@';
+			data_IMU_GPS_tran_GS[0] = '!';
+      data_IMU_GPS_tran_GS[1] = buffer[1];
+      data_IMU_GPS_tran_GS[2] = 21;//NAK
+      data_IMU_GPS_tran_GS[3] = '@';
 			DMA_SetCurrDataCounter(DMA1_Stream4,4);
       DMA_Cmd(DMA1_Stream4,ENABLE);
 		}
@@ -502,19 +476,19 @@ void receive_data_and_reply(char *buffer)
 				}
 			}
 			//send respond to GS
-      Buf_USART2[0] = '!';
-      Buf_USART2[1] = buffer[1];
-      Buf_USART2[2] = 6;//ACK
-      Buf_USART2[3] = '@';
+      data_IMU_GPS_tran_GS[0] = '!';
+      data_IMU_GPS_tran_GS[1] = buffer[1];
+      data_IMU_GPS_tran_GS[2] = 6;//ACK
+      data_IMU_GPS_tran_GS[3] = '@';
 			DMA_SetCurrDataCounter(DMA1_Stream4,4);
       DMA_Cmd(DMA1_Stream4,ENABLE);
 		}
 		else
 		{
-			Buf_USART2[0] = '!';
-      Buf_USART2[1] = buffer[1];
-      Buf_USART2[2] = 21;//NAK
-      Buf_USART2[3] = '@';
+			data_IMU_GPS_tran_GS[0] = '!';
+      data_IMU_GPS_tran_GS[1] = buffer[1];
+      data_IMU_GPS_tran_GS[2] = 21;//NAK
+      data_IMU_GPS_tran_GS[3] = '@';
 			DMA_SetCurrDataCounter(DMA1_Stream4,4);
       DMA_Cmd(DMA1_Stream4,ENABLE);
 		}			

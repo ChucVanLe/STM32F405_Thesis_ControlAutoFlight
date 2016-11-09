@@ -46,3 +46,8 @@
 .\project\luanvan3-05vs2.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\project\luanvan3-05vs2.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\project\luanvan3-05vs2.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\project\luanvan3-05vs2.o: ..\file.h\core.h
+.\project\luanvan3-05vs2.o: ..\file.h\project.h
+.\project\luanvan3-05vs2.o: ..\file.h\def.h
+.\project\luanvan3-05vs2.o: ..\file.h\LL2UTM.h
+.\project\luanvan3-05vs2.o: ..\file.h\def.h
