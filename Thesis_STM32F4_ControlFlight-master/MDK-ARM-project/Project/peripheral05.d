@@ -51,3 +51,4 @@
 .\project\peripheral05.o: ..\file.h\def.h
 .\project\peripheral05.o: ..\file.h\LL2UTM.h
 .\project\peripheral05.o: ..\file.h\def.h
+.\project\peripheral05.o: ..\file.h\gps.h

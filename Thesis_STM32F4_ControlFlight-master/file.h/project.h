@@ -36,6 +36,7 @@
 #include "math.h"
 #include "core.h"
 #include "def.h"
+#include "gps.h"
 
 #include "LL2UTM.h"
 extern GPS_STRUCT GPSStruct;
@@ -104,7 +105,7 @@ extern uint8_t Alt_latest;
 /*****************************Peripheral Function*********************************************/
 float trituyetdoi(float a);
 extern uint8_t Buf_UART4[],Buf_rx4[],Buf1_rx4[];
-extern char Buf_USART2[];
+
 extern  USART_InitTypeDef USART_InitStructure;
 extern uint64_t TickCnt;
 extern DMA_InitTypeDef  DMA_InitStructure;

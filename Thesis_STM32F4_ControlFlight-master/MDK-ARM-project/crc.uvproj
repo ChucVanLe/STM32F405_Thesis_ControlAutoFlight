@@ -538,6 +538,11 @@
               <FileType>1</FileType>
               <FilePath>..\filestmf405.c\LL2UTM.c</FilePath>
             </File>
+            <File>
+              <FileName>gps.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\filestmf405.c\gps.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

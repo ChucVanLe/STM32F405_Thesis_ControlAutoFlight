@@ -18,6 +18,7 @@
 ".\project\luanvan3-05vs2.o"
 ".\project\core.o"
 ".\project\ll2utm.o"
+".\project\gps.o"
 ".\project\fattime.o"
 ".\project\ff.o"
 ".\project\ccsbcs.o"
