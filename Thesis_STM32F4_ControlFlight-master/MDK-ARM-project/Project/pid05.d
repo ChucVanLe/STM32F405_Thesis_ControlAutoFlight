@@ -52,3 +52,4 @@
 .\project\pid05.o: ..\file.h\LL2UTM.h
 .\project\pid05.o: ..\file.h\def.h
 .\project\pid05.o: ..\file.h\gps.h
+.\project\pid05.o: ..\file.h\ConnectWithGS.h

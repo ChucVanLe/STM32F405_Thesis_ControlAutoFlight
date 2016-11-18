@@ -53,3 +53,4 @@
 .\project\gps.o: ..\file.h\LL2UTM.h
 .\project\gps.o: ..\file.h\def.h
 .\project\gps.o: ..\file.h\gps.h
+.\project\gps.o: ..\file.h\ConnectWithGS.h

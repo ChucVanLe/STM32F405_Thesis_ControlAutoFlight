@@ -43,14 +43,14 @@ IMU_STRUCT IMUStruct;
 
 #define GPS_PROCESS_TIMEOUT     (uint32_t)500 //ms
 
-extern uint8_t  data_IMU_GPS_CMD_tran_GS[250], Buf_USART2[250];//data_IMU to 100ms tran data to GS
-
+extern char  data_IMU_GPS_CMD_tran_GS[500], Buf_USART2_trandata_to_GS[500];//data_IMU to 100ms tran data to GS
+extern uint8_t number_byte_respone_to_GS;
 float gps_speed[10];
 
 uint8_t length_data_IMU_GPS_CMD_tran_GS = 0;
 #define GPS_RX_DMA_STREAM     DMA1_Stream5
 uint32_t tick1ms = 0;
-
+extern bool CMD_Start_frame;
 /******************************************************************************
  * 							   PUBLIC FUNCTION                                *
  ******************************************************************************/
@@ -183,7 +183,7 @@ void gps_process(void)
 											for (k = 0; k < len1; k++)
 											{
 												data_IMU[k] = GPSRxBuf[(start_ind + k)% GPS_RX_BUF_LEN];//remove '\n'											
-												data_IMU_GPS_CMD_tran_GS[k] = GPSRxBuf[(start_ind + k)% GPS_RX_BUF_LEN];//remove '\n'											
+												data_IMU_GPS_CMD_tran_GS[number_byte_respone_to_GS + k] = GPSRxBuf[(start_ind + k)% GPS_RX_BUF_LEN];//remove '\n'											
 											}
 											imu_parse(&data_IMU[0]);
 										}
@@ -194,7 +194,7 @@ void gps_process(void)
 												for (k = 0; k < len1; k++)
 												{
                         GPSString[k] = GPSRxBuf[(start_ind + k)%GPS_RX_BUF_LEN];//remove '\n'
-												data_IMU_GPS_CMD_tran_GS[k + length_data_IMU_GPS_CMD_tran_GS] = GPSRxBuf[(start_ind + k)% GPS_RX_BUF_LEN];//remove '\n'											
+												data_IMU_GPS_CMD_tran_GS[number_byte_respone_to_GS + k + length_data_IMU_GPS_CMD_tran_GS] = GPSRxBuf[(start_ind + k)% GPS_RX_BUF_LEN];//remove '\n'											
 												}
 											gps_parse(&GPSString[1]);
 											length_data_IMU_GPS_CMD_tran_GS += len1;
@@ -205,12 +205,17 @@ void gps_process(void)
 												for (k = 0; k < len1; k++)
 												{
                         GPSString[k] = GPSRxBuf[(start_ind + k)%GPS_RX_BUF_LEN];//remove '\n'
-												data_IMU_GPS_CMD_tran_GS[k + length_data_IMU_GPS_CMD_tran_GS] = GPSRxBuf[(start_ind + k)% GPS_RX_BUF_LEN];//remove '\n'											
+												data_IMU_GPS_CMD_tran_GS[number_byte_respone_to_GS + k + length_data_IMU_GPS_CMD_tran_GS] = GPSRxBuf[(start_ind + k)% GPS_RX_BUF_LEN];//remove '\n'											
 												}
-											gps_parse(&GPSString[1]);
-											//tran data to GS
-											DMA_SetCurrDataCounter(DMA1_Stream4, length_data_IMU_GPS_CMD_tran_GS + len1);
-											DMA_Cmd(DMA1_Stream4,ENABLE);
+												gps_parse(&GPSString[1]);
+												//tran data to GS
+												if(!CMD_Start_frame)
+													{
+													strcpy(Buf_USART2_trandata_to_GS, data_IMU_GPS_CMD_tran_GS);
+													DMA_SetCurrDataCounter(DMA1_Stream4, number_byte_respone_to_GS + length_data_IMU_GPS_CMD_tran_GS + len1);
+													DMA_Cmd(DMA1_Stream4,ENABLE);
+													number_byte_respone_to_GS = 0;
+													}
 											}
 										}
                     //DIS_DMA_Write(&GPSString[0], len1); //for debug only

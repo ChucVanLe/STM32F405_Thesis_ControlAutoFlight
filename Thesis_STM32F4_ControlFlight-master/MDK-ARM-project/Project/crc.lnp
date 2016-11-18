@@ -19,6 +19,7 @@
 ".\project\core.o"
 ".\project\ll2utm.o"
 ".\project\gps.o"
+".\project\connectwithgs.o"
 ".\project\fattime.o"
 ".\project\ff.o"
 ".\project\ccsbcs.o"

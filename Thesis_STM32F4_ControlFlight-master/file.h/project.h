@@ -37,7 +37,7 @@
 #include "core.h"
 #include "def.h"
 #include "gps.h"
-
+#include "ConnectWithGS.h"
 #include "LL2UTM.h"
 extern GPS_STRUCT GPSStruct;
 extern IMU_STRUCT IMUStruct;
@@ -101,7 +101,7 @@ void Gent_Pwm_Roll(float Roll);
 void Gent_Pwm_Pitch(float Pitch);
 void Gent_Pwm_Yaw(float Yaw);
 void Gent_Pwm_Alt(float Alt);
-extern uint8_t Alt_latest;
+
 /*****************************Peripheral Function*********************************************/
 float trituyetdoi(float a);
 extern uint8_t Buf_UART4[],Buf_rx4[],Buf1_rx4[];

@@ -52,3 +52,4 @@
 .\project\luanvan3-05vs2.o: ..\file.h\LL2UTM.h
 .\project\luanvan3-05vs2.o: ..\file.h\def.h
 .\project\luanvan3-05vs2.o: ..\file.h\gps.h
+.\project\luanvan3-05vs2.o: ..\file.h\ConnectWithGS.h

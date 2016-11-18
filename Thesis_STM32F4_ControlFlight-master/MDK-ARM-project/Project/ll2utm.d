@@ -52,3 +52,4 @@
 .\project\ll2utm.o: ..\file.h\def.h
 .\project\ll2utm.o: ..\file.h\def.h
 .\project\ll2utm.o: ..\file.h\gps.h
+.\project\ll2utm.o: ..\file.h\ConnectWithGS.h
