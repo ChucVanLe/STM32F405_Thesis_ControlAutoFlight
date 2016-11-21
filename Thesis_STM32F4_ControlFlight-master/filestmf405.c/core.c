@@ -52,20 +52,23 @@ int16_t PULSE_PER_REV = 500;
 BOOL RunEn = TRUE;
 real32_t R1,R2,WPangle;
 real64_t angle_factor=0.6;
-static volatile real64_t xp, yp, pre_xp, pre_yp;
-static volatile real32_t steer_angle=0.0;
-static volatile real64_t angle_error=0.0;
-						volatile real64_t delta_cte;
-#define NUM_WAYPOINT (int32_t)4
+ volatile real64_t xp, yp, pre_xp, pre_yp;
+ volatile real32_t steer_angle=0.0;
+ volatile real64_t angle_error=0.0;
+volatile real64_t delta_cte;
+#define NUM_WAYPOINT (int32_t)6
 
 WAYPOINT_STRUCT WAYPOINT_LLH[NUM_WAYPOINT] = {{ 10.772629,106.659863},
 																					{10.772989,106.659670},
 																					{ 10.772577,106.658852},
 																					{10.772229,106.659032}};
-WAYPOINT_STRUCT WAYPOINT[NUM_WAYPOINT] = {{140.689,99.87, 4.0, 4.0, 90.0},
-																					{127.9,123.7, 4.0, 4.0, 90.0},
-																					{105.8,112.2, 4.0, 4.0, 90.0},
-																					{119.3,87.213, 4.0, 4.0, 90.0}};
+//waypoint hexagon
+WAYPOINT_STRUCT WAYPOINT[NUM_WAYPOINT] = {{0, 0, 4.0, 4.0, 60.0},
+																					{0, 0, 4.0, 4.0, 60.0},
+																					{0, 0, 4.0, 4.0, 60.0},
+																					{0, 0, 4.0, 4.0, 60.0},
+																					{0, 0, 4.0, 4.0, 60.0},
+																					{0, 0, 4.0, 4.0, 60.0}};
 /* //waypoint khu cnc 79 wp
 WAYPOINT_STRUCT WAYPOINT[NUM_WAYPOINT] = {
 {275.3230, 371.4800,1.0, 1.0, 150.0},
@@ -183,6 +186,9 @@ static int32_t wp_idx;
 static real64_t wpx1, wpx2, wpy1, wpy2, wpx, wpy, wpxy, inv_dist_wp, slope, m, c;	
 static char debug_msg[200];																					
 volatile real64_t kp_cte, ki_cte;
+extern bool switch_to_control_flight_use_standley;//when receive data of path success--> control_path_use_stanley = true;
+extern double utm_lat_long_from_GS[14][2];//contain lat, long in utm coordinates which is uploaded from GS
+extern PID_Index Yaw_PID;
 /******************************************************************************
  * 							   PUBLIC FUNCTION                                *
  ******************************************************************************/
@@ -210,9 +216,18 @@ void steer_init(void)
  ******************************************************************************/
 void steer_set(real32_t *angle)
 {
-    SteerAngleSet = (*angle);
+    SteerAngleSet = (*angle);//set yaw angle.
 }
 
+/******************************************************************************
+ * @fn     steer_set     
+ * @brief  
+ * @retval None
+ ******************************************************************************/
+void standley_set_yaw_angle(real32_t *angle)
+{
+    Yaw_PID.SetPoint = (*angle);//set yaw angle.
+}
 /******************************************************************************
  * @fn     steer_get     
  * @brief  
@@ -232,19 +247,27 @@ void get_wp_index()
 {
 	real64_t d_min, d;
 	int i;
-	
-	d_min = distance(xp, yp, WAYPOINT[0].x, WAYPOINT[0].y);
-	wp_idx = 0;
-	
-	for (i = 1; i < NUM_WAYPOINT; i++)
+	for (i = 0; i < NUM_WAYPOINT; i++)//get position flight across from GS
 	{
-		d = distance(xp, yp, WAYPOINT[i].x, WAYPOINT[i].y);
-		if (d < d_min)
-		{
-			d_min = d;
-			wp_idx = i;
-		}
+		WAYPOINT[i].x = utm_lat_long_from_GS[i][0];
+		WAYPOINT[i].y = utm_lat_long_from_GS[i][1];
 	}
+	//c2: tinh toa do 6 diem hexagon, bat dau tu vi tri hien tai cua may bay	
+//	d_min = distance(xp, yp, WAYPOINT[0].x, WAYPOINT[0].y);
+//	wp_idx = 0;
+//	
+//	for (i = 1; i < NUM_WAYPOINT; i++)
+//	{
+//		d = distance(xp, yp, WAYPOINT[i].x, WAYPOINT[i].y);
+//		if (d < d_min)
+//		{
+//			d_min = d;
+//			wp_idx = i;
+//		}
+//	}
+	//diem thu nhat trong hexagon la vi tri hien tai cua may bay WAYPOINT[0] nen
+	//ta khong can tinh d_min, vi tri gan may bay nhat chinh la WAYPOINT[0]
+	wp_idx = 0;
 	R2 = WAYPOINT[wp_idx].R2;	
 	wpx1 = WAYPOINT[wp_idx].x;
 	wpy1 = WAYPOINT[wp_idx].y;
@@ -255,7 +278,8 @@ void get_wp_index()
 	wpy = wpy2 - wpy1;
 	wpxy = wpx1 * wpy2 - wpx2 * wpy1;
 	inv_dist_wp = 1/sqrt(wpx*wpx + wpy*wpy);
-	slope = atan2(wpy, wpx);
+	//slope = atan2(wpy, wpx);//anh Huan: slope hop voi Ox.
+	slope = atan2(wpx, wpy);//chuc: slope hop voi Oy
 	#warning check wpx==0
 	m = wpy / wpx;
 	c = wpy1 - m*wpx1; 
@@ -292,7 +316,7 @@ void car_init(void)
 	wpy = wpy2 - wpy1;
 	wpxy = wpx1 * wpy2 - wpx2 * wpy1;
 	inv_dist_wp = 1/sqrt(wpx*wpx + wpy*wpy);
-	slope = atan2(wpy, wpx);
+	slope = atan2(wpx, wpy);
 	#warning check wpx==0
 	m = wpy / wpx;
 	c = wpy1 - m*wpx1; 
@@ -498,7 +522,7 @@ void car_control(void)
 
 		// Wait until get valid data from 2 sensors GPS & IMU
     if (!(GPSStruct.isavailable && IMUStruct.isavailable)) return; 
-    if ((GPSStruct.quality != GPS_QA_FIX) &&
+    if ((GPSStruct.quality != GPS_QA_NOT_FIX) &&
        (GPSStruct.isready))
     {
 				static volatile real64_t cteI = 0.0;
@@ -520,13 +544,15 @@ void car_control(void)
 										&yp, &xp, &UTMLetter);
 				//test
 //					LatLong2UTM(10.876543, 106.6789, 
-//										&yp, &xp, &UTMLetter);			
+//										&yp, &xp, &UTMLetter);
+				//result --ok			
 				xp -= offset_x;
 				yp -= offset_y;
-
-				if (first_pos)
+//when receive hexagon from GS-->control_path_use_stanley = true.
+				if (switch_to_control_flight_use_standley)
 				{
-					first_pos = false;
+					switch_to_control_flight_use_standley = false;
+					//get hexagon from GS
 					get_wp_index();//waypoint is point flight accross
 				}
 			
@@ -552,7 +578,7 @@ void car_control(void)
 					wpy = wpy2 - wpy1;
 					wpxy = wpx1 * wpy2 - wpx2 * wpy1;
 					inv_dist_wp = 1/sqrt(wpx*wpx + wpy*wpy);
-					slope = atan2(wpy, wpx);
+					slope = atan2(wpx, wpy);
 					m = wpy / wpx;
 					c = wpy1 - m*wpx1;
 					
@@ -570,7 +596,9 @@ void car_control(void)
 					cteI += GPS_MSG_RATE_S*cte;
 				}
 				
-				dir = IMUStruct.yaw * DEGREE2RAD;
+				//dir = IMUStruct.yaw * DEGREE2RAD;
+				//do may bay troi nen goc yaw khac heading, ta lay goc heading la huong cua vecto van toc
+				dir = GPSStruct.heading * DEGREE2RAD;
 				while (fabsf((float)dir) > PI)//-PI <= yaw <= PI
 				{
 					if (dir < -1.0*PI)
@@ -578,7 +606,7 @@ void car_control(void)
 					else if (dir > PI)
 						dir -= 2*PI;
 				}
-				angle_error = slope - dir;//??  
+				angle_error = slope - dir;//??  --> ok
 
 				if (angle_error < -1.0*PI)
 					angle_error = angle_error +2*PI;
@@ -622,8 +650,8 @@ void car_control(void)
 					//}
 				}
 
-				snprintf(debug_msg,200,"%11.3f,%11.3f,%6.2f,%11.3f,%11.3f\r\n"
-					,xp,yp,IMUStruct.yaw,wpx1,wpx2);
+//				snprintf(debug_msg,200,"%11.3f,%11.3f,%6.2f,%11.3f,%11.3f\r\n"
+//					,xp,yp,IMUStruct.yaw,wpx1,wpx2);
 			
 				steer_angle *= K_STEER;	
         // Set steer angle
@@ -631,7 +659,7 @@ void car_control(void)
 				//{ 
 					steer_set(&steer_angle);
 				//}
-//				DIS_DMA_Write((uint8_t*)debug_msg, strlen(debug_msg));
+
     }			
 }
 
@@ -645,7 +673,7 @@ void car_control(void)
 void main_control(void)
 {
     car_control();
-    steer_control();
+    //steer_control();
 }
 
 

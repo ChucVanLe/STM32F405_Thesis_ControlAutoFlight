@@ -124,7 +124,7 @@ void Sampling_GGA(char* GGA , int lenght)
 	else Longitude.Current = 0;
 
 	// neu co thong tin do cao thi lam 
-	if(state_alt==1)
+	//if(state_alt==1)
 	{
 		if (ep_alt != (fp_alt))
 		{
@@ -174,11 +174,11 @@ void Sampling_RPY(uint8_t* IMU , int lenght)
 	press=(press*pow(10,5))/2.25577;
 	Press.Current=press;
 	//chuyen doi press sang do cao
-	if(state_press==1)
-	{
-	Alt_PID.Current = Press.Current;
-	Alt_PID.Enable =1 ;
-	}
+//	if(state_press==1)
+//	{
+//	Alt_PID.Current = Press.Current;
+//	Alt_PID.Enable =1 ;
+//	}
 }
 
 /*******************************************************************************
@@ -222,7 +222,7 @@ void Call_Roll_PID(float Setpoint)
 		// Dat gia tri vao PWM	
 		Gent_Pwm_Roll(-Roll_PID.Pid_Result);
 				
-		Roll_PID.PreError=Roll_PID.Error;
+		Roll_PID.PreError = Roll_PID.Error;
 	}
 	else return;
 }
@@ -262,7 +262,7 @@ void Call_Pitch_PID(float Setpoint)
 		// Dat gia tri vao PWM	
 		Gent_Pwm_Pitch(Pitch_PID.Pid_Result);
 				
-		Pitch_PID.PreError=Pitch_PID.Error;
+		Pitch_PID.PreError = Pitch_PID.Error;
 	}
 	else return;
 }
@@ -302,7 +302,7 @@ void Call_Yaw_PID(float Setpoint)
 		// Dat gia tri vao PWM	
 		Gent_Pwm_Yaw(Yaw_PID.Pid_Result);
 				
-		Yaw_PID.PreError=Yaw_PID.Error;
+		Yaw_PID.PreError = Yaw_PID.Error;
 	}
 	else return;
 }
@@ -317,7 +317,7 @@ void Call_Alt_PID(float Setpoint)
 
 		if(Alt_PID.Enable)
 		{
-			if(1 == state_alt)
+			//if(1 == state_alt)
 			{
 				//at manual --> auto, get setpoint is current
 
@@ -346,10 +346,7 @@ void Call_Alt_PID(float Setpoint)
 						
 				Alt_PID.PreError = Alt_PID.Error;
 			}
-			if(1 == state_press)
-			{
 
-			}
 		}
 		else return;
 }

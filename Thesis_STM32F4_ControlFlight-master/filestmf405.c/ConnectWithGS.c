@@ -2,13 +2,13 @@
 #include "project.h"
 //------------------------------
 //variable
-float lat_long_from_GS[14][2];//contain lat, long which is uploaded from GS
+double utm_lat_long_from_GS[14][2];//contain lat, long which is uploaded from GS
 uint8_t index_receive_enough_data_GS = 0;//counter number of char from GS
 extern char  data_IMU_GPS_CMD_tran_GS[500];//data_IMU to 100ms tran data to GS
 uint8_t number_byte_respone_to_GS = 0;
 extern bool CMD_Trigger, CMD_Start_frame;//mode tran data to ground station or receive data from GS,CMD_Trigger = true: receive data from GS
 extern char data_from_pc[250];
-
+bool control_path_use_stanley = false, switch_to_control_flight_use_standley = false;
 #define		BUFF_SIZE			1//interrupt UART_DMA when receive BUFF_SIZE from GS
 //------------------------------
 void receive_data_and_reply(char *buffer)
@@ -30,8 +30,8 @@ void receive_data_and_reply(char *buffer)
 	{
 		temp_lat[i] = 0;
 		temp_long[i] = 0;
-		lat_long_from_GS[i][0] = 0;
-		lat_long_from_GS[i][1] = 0;
+		utm_lat_long_from_GS[i][0] = 0;
+		utm_lat_long_from_GS[i][1] = 0;
 	}
 	
 	if('4' != buffer[1])//'4' = buffer[1]: upload latitude, longtitude
@@ -79,7 +79,7 @@ void receive_data_and_reply(char *buffer)
 			Roll_PID.Kd = atof(temp_kd);
 			strncpy(temp_setpoint, &buffer[fp_setpoint + 1], ep_setpoint - fp_setpoint - 1);
 			Roll_PID.SetPoint = atof(temp_setpoint);
-			Update_heso_Roll=1;
+			//Update_heso_Roll=1;
 			//send reply to GS
       data_IMU_GPS_CMD_tran_GS[0] = '!';
       data_IMU_GPS_CMD_tran_GS[1] = buffer[1];
@@ -118,7 +118,7 @@ void receive_data_and_reply(char *buffer)
 			Pitch_PID.Kd = atof(temp_kd);
 			strncpy(temp_setpoint, &buffer[fp_setpoint + 1], ep_setpoint - fp_setpoint - 1);
 			Pitch_PID.SetPoint = atof(temp_setpoint);
-			Update_heso_Pitch=1;
+			//Update_heso_Pitch=1;
 			//send reply to GS
       data_IMU_GPS_CMD_tran_GS[0] = '!';
       data_IMU_GPS_CMD_tran_GS[1] = buffer[1];
@@ -154,7 +154,7 @@ void receive_data_and_reply(char *buffer)
 			Yaw_PID.Kd = atof(temp_kd);
 			strncpy(temp_setpoint, &buffer[fp_setpoint + 1], ep_setpoint - fp_setpoint - 1);
 			Yaw_PID.SetPoint = atof(temp_setpoint);
-			Update_heso_Yaw=1;
+			//Update_heso_Yaw=1;
 			//send reply to GS
       data_IMU_GPS_CMD_tran_GS[0] = '!';
       data_IMU_GPS_CMD_tran_GS[1] = buffer[1];
@@ -190,7 +190,7 @@ void receive_data_and_reply(char *buffer)
 			Alt_PID.Kd = atof(temp_kd);
 			strncpy(temp_setpoint, &buffer[fp_setpoint + 1], ep_setpoint - fp_setpoint - 1);
 			Alt_PID.SetPoint = atof(temp_setpoint);
-			Update_heso_Alt=1;
+			//Update_heso_Alt=1;
 			//send reply to GS
       data_IMU_GPS_CMD_tran_GS[0] = '!';
       data_IMU_GPS_CMD_tran_GS[1] = buffer[1];
@@ -235,7 +235,7 @@ void receive_data_and_reply(char *buffer)
 				{
 					fp_lon = i;			
 					strncpy(temp_lat, &buffer[fp_lat + 1], fp_lon - fp_lat - 1);
-					lat_long_from_GS[index_array_lat_lon][0] = atof(temp_lat);
+					utm_lat_long_from_GS[index_array_lat_lon][0] = atof(temp_lat);
 				}
 				else
 				{
@@ -245,7 +245,7 @@ void receive_data_and_reply(char *buffer)
 						if(2 != fp_lat)
 						{
 						strncpy(temp_long, &buffer[fp_lon + 1], fp_lat - fp_lon - 1);
-						lat_long_from_GS[index_array_lat_lon++][1] = atof(temp_long);
+						utm_lat_long_from_GS[index_array_lat_lon++][1] = atof(temp_long);
 						}
 					}
 				}
@@ -256,7 +256,8 @@ void receive_data_and_reply(char *buffer)
       data_IMU_GPS_CMD_tran_GS[2] = 6;//ACK
       data_IMU_GPS_CMD_tran_GS[3] = '@';
 			number_byte_respone_to_GS = 4;
-      
+      control_path_use_stanley = true;
+			switch_to_control_flight_use_standley = true;
 		}
 		else
 		{

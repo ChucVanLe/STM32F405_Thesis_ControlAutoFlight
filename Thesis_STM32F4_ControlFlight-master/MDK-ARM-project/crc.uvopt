@@ -171,34 +171,18 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>150</LineNumber>
+          <LineNumber>544</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134222120</Address>
+          <Address>134241742</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\filestmf405.c\luanvan3-05vs2.c</Filename>
+          <Filename>..\filestmf405.c\core.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\crc\../filestmf405.c/luanvan3-05vs2.c\150</Expression>
-        </Bp>
-        <Bp>
-          <Number>1</Number>
-          <Type>0</Type>
-          <LineNumber>150</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134222148</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\filestmf405.c\luanvan3-05vs2.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\crc\../filestmf405.c/luanvan3-05vs2.c\150</Expression>
+          <Expression>\\crc\../filestmf405.c/core.c\544</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -273,6 +257,18 @@
           <ItemText>data_from_pc</ItemText>
         </Ww>
       </WatchWindow1>
+      <WatchWindow2>
+        <Ww>
+          <count>0</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>WAYPOINT</ItemText>
+        </Ww>
+        <Ww>
+          <count>1</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>utm_lat_long_from_GS</ItemText>
+        </Ww>
+      </WatchWindow2>
       <MemoryWindow1>
         <Mm>
           <WinNumber>1</WinNumber>

@@ -62,7 +62,7 @@ extern SPI_InitTypeDef  SPI_InitStructure;
 extern GPIO_InitTypeDef GPIO_InitStructure;
 extern uint8_t Update_heso_Roll,Update_heso_Pitch,Update_heso_Yaw,Update_heso_Alt,Update_heso_Press;
 extern uint8_t flag_press;
-extern uint8_t flag_set_or_current_press,state_alt,state_press;
+extern uint8_t flag_set_or_current_press;
 void power (void);
 /*****************************PID Function*********************************************/
 typedef struct

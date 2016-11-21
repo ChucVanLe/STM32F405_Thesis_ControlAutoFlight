@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * thesis of LeVanChuc
+ * Thesis of LeVanChuc
  *
  ******************************************************************************/
 
@@ -31,25 +31,23 @@
  /* 							    GLOBAL VARIABLE                               */
 /******************************************************************************/
 
-uint8_t index_find_e = 0;//variable for receive from GS
-int lenght_of_data_IMU_GPS = 0;
+uint8_t index_find_e = 0;//variable for reset buffer receive data from GS
+
 uint8_t Buf_rx4[1];
-uint8_t Update_heso_Roll=0,Update_heso_Pitch=0,Update_heso_Yaw=0,Update_heso_Alt=0,Update_heso_Press=0;
+
 int i = 0;
-uint8_t state_alt = 1,state_press = 0;
-float test_simulate1, test_simulate2, test_simulate3;
+
 /***********************************AnhHuan*******************************************/
 
 char  data_IMU_GPS_CMD_tran_GS[500], Buf_USART2_trandata_to_GS[500];//data_IMU to 100ms tran data to GS
 bool CMD_Trigger = false, CMD_Start_frame = false;//mode tran data to ground station or receive data from GS,CMD_Trigger = true: receive data from GS
 char data_from_pc[250];
+extern bool control_path_use_stanley;//when receive data of path success--> control_path_use_stanley = true;
 
 
 /******************************************************************************
  * 							PUBLIC FUNCTION                                   *
  ******************************************************************************/
- 
-
 
 /*************************************************************************************/
 int main(void)
@@ -62,14 +60,11 @@ int main(void)
     PID_Init();
 		MyGPIO_Configuration();
     EXTI_FPGA_Pa8();
-    UART4_Configuration(57600);
-    USART2_Configuration(460800);
-//    DMA_UART4_Configuration((uint8_t*)data_IMU_GPS_CMD_tran_GS,250);//tran data to GS
+    UART4_Configuration(57600);//interface with GS
+    USART2_Configuration(460800);//interface with GPS/IMU
     DMA_UART4_Configuration((uint8_t*)Buf_USART2_trandata_to_GS, 500);//receive data from IMU/GPS
     DMA_UART4_RX(Buf_rx4, 1);//receive data from GS
 // defaude dieu khien o che do ALT  
-    state_press = 0;
-    state_alt = 1;
     
     MyTIM_PWM_Configuration();  
        
@@ -79,16 +74,11 @@ int main(void)
 		gps_init(460800);
     while(1)
     {
-        if (GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_8))//auto
-        {
+        if (GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_8))//auto control
+					{//test ok:21/11/2016
 						Call_Roll_PID(Roll_PID.SetPoint);   
 						Call_Pitch_PID(Pitch_PID.SetPoint);
 						Call_Yaw_PID(Yaw_PID.SetPoint);
-						//test simute altitude
-//						if(Yaw_PID.Current > 0)
-//						Alt_PID.Current = Yaw_PID.Current;
-//						else Alt_PID.Current = 0;
-//						Call_Alt_PID(30);
 						//real-time
 						Call_Alt_PID(Alt_PID.SetPoint);		
         }
@@ -97,7 +87,7 @@ int main(void)
 		//-------------------get current value IMU/GPS----------------------------------
 		//--------------------tran data to GS-------------------------------------------
 		//---------------------receive data from GS-------------------------------------
-		if(CMD_Trigger) //receive enough 1 frame
+		if(CMD_Trigger) //receive enough 1 frame command
 		{//if CMD_Trigger = 1 ; receive data from ground station 
 				Delay_100ms();
 				receive_data_and_reply(&data_from_pc[0]);
@@ -110,12 +100,12 @@ int main(void)
 						data_from_pc[index_find_e] = 0;
 
 		}
-//		else//update code data IMU 10ms, data GPS 100ms	
+//update code data IMU 10ms, data GPS 100ms	
 			//Anh Huan....................................................
-			gps_process();//ok
-			//main_control();
-
-//...........................	remove code save data because Mr.Huan has done it.				        
+		gps_process();//ok: get roll, pitch, yaw, lat, long, alt,
+		if(control_path_use_stanley)
+			main_control();//control flight use standley
+			        
     }// end while
 }//end main
     

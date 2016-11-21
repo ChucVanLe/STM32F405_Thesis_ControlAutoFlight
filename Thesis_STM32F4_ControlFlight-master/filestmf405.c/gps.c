@@ -209,7 +209,7 @@ void gps_process(void)
 												}
 												gps_parse(&GPSString[1]);
 												//tran data to GS
-												if(!CMD_Start_frame)
+												if(!CMD_Start_frame)//only tran or receive data
 													{
 													strcpy(Buf_USART2_trandata_to_GS, data_IMU_GPS_CMD_tran_GS);
 													DMA_SetCurrDataCounter(DMA1_Stream4, number_byte_respone_to_GS + length_data_IMU_GPS_CMD_tran_GS + len1);
@@ -218,23 +218,6 @@ void gps_process(void)
 													}
 											}
 										}
-                    //DIS_DMA_Write(&GPSString[0], len1); //for debug only
-                    // Process string
-//                    if (GPSString[2] == 'G')
-//                    {
-//                        //strcpy(GPSString, "$GPVTG,37.313,T,37.313,M,0.061,N,0.113,K*4A G\n");
-//                        //strcpy(GPSString, "$GPGGA,084808.00,1046.3727894,N,10639.5866087,E,4,05,1.9,2.252,M,0.00,M,01,0000*66 G\n");
-//                        //strcpy(GPSString, "$GPGGA,084808.00,1046.37341245,N,10639.58681519,E,4,09,1.2,11.529,M,2.291,M,1.0,0677*40 R\n");
-//                        gps_parse(&GPSString[0]);
-//											//tran data to GS
-//											DMA_SetCurrDataCounter(DMA1_Stream4, lenght_of_data_IMU_GPS);
-//											DMA_Cmd(DMA1_Stream4,ENABLE);  
-//                    }
-//                    else if (GPSString[2] == ' ')
-//                    {
-//                        //$  0010 -0010  0364  0007  0006  0020  0029  0013  1055  0463  0673  0103
-//                        imu_parse(&GPSString[0]);
-//                    }
                 }
                 break;
             default:
@@ -303,6 +286,20 @@ void gps_parse(uint8_t *gps_str)
         else
         {
             GPSStruct.speed = 0;
+            GPSStruct.quality = GPS_QA_NOT_FIX;
+        }
+				// heading
+        ind0 = field_ind[GPS_GPVTG_TRUE_HEADING_IND];
+        ind1 = field_ind[GPS_GPVTG_TRUE_HEADING_IND + 1];
+        len = ind1 - ind0;
+        if (len != 1)
+        {
+            p = (char*)&gps_str[ind0];
+            GPSStruct.heading = atof(p);
+        }
+        else
+        {
+            GPSStruct.heading = 0;
             GPSStruct.quality = GPS_QA_NOT_FIX;
         }
     }
