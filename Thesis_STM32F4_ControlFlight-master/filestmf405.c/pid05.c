@@ -338,9 +338,12 @@ void Call_Alt_PID(float Setpoint)
 				//PartKi += Ki * Error * Time_sample;
 				//PartKd = Kd * (Error - PreError) / Time_sample;
 				Alt_PID.Pid_Result += Alt_PID.Kp * Alt_PID.Error + Alt_PID.PartKi + Alt_PID.Kd * (Alt_PID.Error - Alt_PID.PreError) / Time_sample;
-				//limit
-				if(Alt_PID.Pid_Result > 0.42) Alt_PID.Pid_Result = 0.42;
-				if(Alt_PID.Pid_Result < -0.26) Alt_PID.Pid_Result = -0.26;
+				//limit at real time
+				if(Alt_PID.Pid_Result > -0.0) Alt_PID.Pid_Result = 0.0;
+				if(Alt_PID.Pid_Result < -0.36) Alt_PID.Pid_Result = -0.36;
+				//limit at simulate
+//				if(Alt_PID.Pid_Result > -0.25) Alt_PID.Pid_Result = -0.25;
+//				if(Alt_PID.Pid_Result < -0.36) Alt_PID.Pid_Result = -0.36;
 				// Dat gia tri vao PWM	
 				Gent_Pwm_Alt(Alt_PID.Pid_Result);
 						

@@ -44,23 +44,21 @@ compiling pid05.c...
   		if(Pitch_PID.Pid_Result > 0.29) Pitch_PID.Pid_Result = 0.29;
 ..\filestmf405.c\pid05.c(300): warning:  #1035-D: single-precision operand implicitly converted to double-precision
   		if(Yaw_PID.Pid_Result > 0.4) Yaw_PID.Pid_Result = 0.4;
-..\filestmf405.c\pid05.c(342): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-  				if(Alt_PID.Pid_Result > 0.42) Alt_PID.Pid_Result = 0.42;
-..\filestmf405.c\pid05.c(361): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\filestmf405.c\pid05.c(364): warning:  #1035-D: single-precision operand implicitly converted to double-precision
   	Pwm =(int)((float)(1.5 + Roll) * 21711 * 73 / 1000);
-..\filestmf405.c\pid05.c(374): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\filestmf405.c\pid05.c(377): warning:  #1035-D: single-precision operand implicitly converted to double-precision
    	Pwm =(int)((float)(1.56 + Pitch) * 1584903 /1000);
-..\filestmf405.c\pid05.c(383): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\filestmf405.c\pid05.c(386): warning:  #1035-D: single-precision operand implicitly converted to double-precision
   	Pwm =(int)((float)(1.5 + Yaw) * 21711 * 73 / 1000);
-..\filestmf405.c\pid05.c(393): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\filestmf405.c\pid05.c(396): warning:  #1035-D: single-precision operand implicitly converted to double-precision
   	Pwm =(int)((float)(1.5 + Alt) * 21711 * 73 / 1000);
-..\filestmf405.c\pid05.c(402): warning:  #1-D: last line of file ends without a newline
+..\filestmf405.c\pid05.c(405): warning:  #1-D: last line of file ends without a newline
   }
-..\filestmf405.c\pid05.c: 14 warnings, 0 errors
+..\filestmf405.c\pid05.c: 13 warnings, 0 errors
 linking...
 Program Size: Code=25752 RO-data=1240 RW-data=596 ZI-data=27916  
-".\Project\crc.axf" - 0 Error(s), 14 Warning(s).
-Build Time Elapsed:  00:00:39
+".\Project\crc.axf" - 0 Error(s), 13 Warning(s).
+Build Time Elapsed:  00:00:07
 </pre>
 </body>
 </html>

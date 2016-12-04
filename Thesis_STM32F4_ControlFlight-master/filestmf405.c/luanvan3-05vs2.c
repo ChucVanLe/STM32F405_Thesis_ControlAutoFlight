@@ -64,8 +64,7 @@ int main(void)
     USART2_Configuration(460800);//interface with GPS/IMU
     DMA_UART4_Configuration((uint8_t*)Buf_USART2_trandata_to_GS, 500);//receive data from IMU/GPS
     DMA_UART4_RX(Buf_rx4, 1);//receive data from GS
-// defaude dieu khien o che do ALT  
-    
+
     MyTIM_PWM_Configuration();  
        
 //    SysTick_Config(SystemCoreClock/500);//interrupt system 2ms
@@ -98,10 +97,9 @@ int main(void)
 				CMD_Start_frame = false;
 				for(index_find_e = 0; index_find_e < 250; index_find_e ++)
 						data_from_pc[index_find_e] = 0;
-
 		}
 //update code data IMU 10ms, data GPS 100ms	
-			//Anh Huan....................................................
+//Anh Huan....................................................
 		gps_process();//ok: get roll, pitch, yaw, lat, long, alt,
 		if(control_path_use_stanley)
 			main_control();//control flight use standley
