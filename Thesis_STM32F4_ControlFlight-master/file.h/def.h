@@ -160,6 +160,7 @@ typedef struct
     real32_t speed;
     real32_t heading;
 		real32_t mag_heading;
+		real32_t alt_press;
 }GPS_STRUCT;
 
 typedef struct
@@ -168,6 +169,8 @@ typedef struct
     real32_t roll;
     real32_t pitch;
     real32_t yaw;
+		real32_t press;
+		real32_t alt_press;
 }IMU_STRUCT;
 
 typedef struct

@@ -39,6 +39,7 @@
 #define IMU_ROLL_IND            1
 #define IMU_PITCH_IND           2
 #define IMU_YAW_IND             3
+#define IMU_PRESS_IND           13
 
 #define GPS_PROCESS_TIMEOUT     (uint32_t)500 //ms
 

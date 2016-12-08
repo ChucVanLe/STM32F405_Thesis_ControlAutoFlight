@@ -383,7 +383,7 @@ void imu_parse(uint8_t *imu_str)
 {
     static uint8_t field_ind[20];
     char *p; // cast to this pointer to avoid warning from compiler for atoi function
-
+		double temp_alt;
     IMUStruct.isavailable = TRUE;
     imu_getfieldind(imu_str, 0, field_ind);
    
@@ -398,7 +398,16 @@ void imu_parse(uint8_t *imu_str)
     // yaw angle
     p = (char*)&imu_str[field_ind[IMU_YAW_IND]];
     IMUStruct.yaw = atoi (p) * 0.1f;
-	//update roll, pitch, yaw
+	  // press value
+    p = (char*)&imu_str[field_ind[IMU_PRESS_IND]];
+    IMUStruct.press = atoi (p) * 0.1f;
+		//calculate alt
+		temp_alt = 1127;
+		temp_alt += 100000;
+		temp_alt = 1- pow((temp_alt/101325),(1/5.25578));
+		temp_alt = (temp_alt*pow(10,5))/2.25577;
+		IMUStruct.alt_press = temp_alt;
+		//update roll, pitch, yaw
 		Roll_PID.Current = IMUStruct.roll;
 		Roll_PID.Enable = 1;
 		Pitch_PID.Current = IMUStruct.pitch;
