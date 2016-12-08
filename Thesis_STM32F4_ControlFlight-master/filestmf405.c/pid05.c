@@ -325,10 +325,10 @@ void Call_Alt_PID(float Setpoint)
 				Alt_PID.Error = Setpoint - Alt_PID.Current;
 
 				//limit -180, 180
-				if (Alt_PID.Error > 180)
-					Alt_PID.Error -= 360;
-				if (Alt_PID.Error < -180)
-					Alt_PID.Error += 360;
+//				if (Alt_PID.Error > 180)
+//					Alt_PID.Error -= 360;
+//				if (Alt_PID.Error < -180)
+//					Alt_PID.Error += 360;
 				//PID_ThanhTan
 				//Alt_PID.Pid_Result_Temp=Alt_PID.Pid_Result;
 				//Alt_PID.Pid_Result=Alt_PID.Pid_Result_Temp+Alt_PID.a0*Alt_PID.e[2]+Alt_PID.a1*Alt_PID.e[1]	+Alt_PID.a2*Alt_PID.e[0];
