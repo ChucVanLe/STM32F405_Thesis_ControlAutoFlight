@@ -314,6 +314,7 @@ Output: None
 *******************************************************************************/
 void Call_Alt_PID(float Setpoint)
 {
+	float Time_sample_GPS = 0.1;
 
 		if(Alt_PID.Enable)
 		{
@@ -333,11 +334,11 @@ void Call_Alt_PID(float Setpoint)
 				//Alt_PID.Pid_Result_Temp=Alt_PID.Pid_Result;
 				//Alt_PID.Pid_Result=Alt_PID.Pid_Result_Temp+Alt_PID.a0*Alt_PID.e[2]+Alt_PID.a1*Alt_PID.e[1]	+Alt_PID.a2*Alt_PID.e[0];
 				//new pid controller
-				Alt_PID.PartKi += Alt_PID.Ki * Alt_PID.Error * Time_sample;
+				Alt_PID.PartKi += Alt_PID.Ki * Alt_PID.Error * Time_sample_GPS;
 				//PartKp = Kp * Error
 				//PartKi += Ki * Error * Time_sample;
 				//PartKd = Kd * (Error - PreError) / Time_sample;
-				Alt_PID.Pid_Result += Alt_PID.Kp * Alt_PID.Error + Alt_PID.PartKi + Alt_PID.Kd * (Alt_PID.Error - Alt_PID.PreError) / Time_sample;
+				Alt_PID.Pid_Result += Alt_PID.Kp * Alt_PID.Error + Alt_PID.PartKi + Alt_PID.Kd * (Alt_PID.Error - Alt_PID.PreError) / Time_sample_GPS;
 				//limit at real time
 				if(Alt_PID.Pid_Result > -0.0) Alt_PID.Pid_Result = 0.0;
 				if(Alt_PID.Pid_Result < -0.36) Alt_PID.Pid_Result = -0.36;
