@@ -14,12 +14,12 @@ PID_Index Press;
 void PID_Init(void)
 {
 	Roll_PID.Error = Roll_PID.PreError = 0;
-	Roll_PID.Kp = 0.00005;
+	Roll_PID.Kp = 0.0001;
 	Roll_PID.Ki = 0.0000015;
 	Roll_PID.Kd = 0.000001;
 	Roll_PID.Switch_manual_auto = false;
 	Pitch_PID.Error = Pitch_PID.PreError = 0;
-	Pitch_PID.Kp = 0.00005;
+	Pitch_PID.Kp = 0.0001;
 	Pitch_PID.Ki = 0.0000015;
 	Pitch_PID.Kd = 0.000001;
 	Pitch_PID.Switch_manual_auto = false;
