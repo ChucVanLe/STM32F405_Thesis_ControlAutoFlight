@@ -27,19 +27,73 @@ Project File Date:  11/18/2016
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 3 (build 300)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'CRC'
-compiling ccsbcs.c...
-"no source": Error:  #5: cannot open source input file "..\Sd Card\option\ccsbcs.c": No such file or directory
-..\Sd Card\option\ccsbcs.c: 0 warnings, 1 error
 compiling fattime.c...
 "no source": Error:  #5: cannot open source input file "..\Sd Card\fattime.c": No such file or directory
 ..\Sd Card\fattime.c: 0 warnings, 1 error
 compiling ff.c...
 "no source": Error:  #5: cannot open source input file "..\Sd Card\ff.c": No such file or directory
 ..\Sd Card\ff.c: 0 warnings, 1 error
+compiling ccsbcs.c...
+"no source": Error:  #5: cannot open source input file "..\Sd Card\option\ccsbcs.c": No such file or directory
+..\Sd Card\option\ccsbcs.c: 0 warnings, 1 error
+compiling pid05.c...
+..\file.h\LL2UTM.h(18): warning:  #1-D: last line of file ends without a newline
+   
+..\file.h\ConnectWithGS.h(18): warning:  #1-D: last line of file ends without a newline
+   
+..\filestmf405.c\pid05.c(147): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	roll=roll*0.1;
+..\filestmf405.c\pid05.c(155): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	pitch=pitch*0.1;
+..\filestmf405.c\pid05.c(163): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	yaw=yaw*0.1;
+..\filestmf405.c\pid05.c(225): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  		if(Roll_PID.Pid_Result > 0.4) Roll_PID.Pid_Result = 0.4;
+..\filestmf405.c\pid05.c(244): warning:  #167-D: argument of type "volatile bool *" is incompatible with parameter of type "bool *"
+  		TIM4->CCR2 = Call_PID_Controller_Angle(&Pitch_PID.Enable, Setpoint, Pitch_PID.Current, &Pitch_PID.PartKi,
+..\filestmf405.c\pid05.c(244): warning:  #167-D: argument of type "volatile float *" is incompatible with parameter of type "float *"
+  		TIM4->CCR2 = Call_PID_Controller_Angle(&Pitch_PID.Enable, Setpoint, Pitch_PID.Current, &Pitch_PID.PartKi,
+..\filestmf405.c\pid05.c(245): warning:  #167-D: argument of type "volatile float *" is incompatible with parameter of type "float *"
+  		Pitch_PID.Kp, Pitch_PID.Ki, Pitch_PID.Kd, 0.01, &Pitch_PID.Pid_Result, &Pitch_PID.PreError,
+..\filestmf405.c\pid05.c(245): warning:  #167-D: argument of type "volatile float *" is incompatible with parameter of type "float *"
+  		Pitch_PID.Kp, Pitch_PID.Ki, Pitch_PID.Kd, 0.01, &Pitch_PID.Pid_Result, &Pitch_PID.PreError,
+..\filestmf405.c\pid05.c(258): warning:  #167-D: argument of type "volatile bool *" is incompatible with parameter of type "bool *"
+  		TIM4->CCR4 = Call_PID_Controller_Angle(&Yaw_PID.Enable, Setpoint, Yaw_PID.Current, &Yaw_PID.PartKi,
+..\filestmf405.c\pid05.c(258): warning:  #167-D: argument of type "volatile float *" is incompatible with parameter of type "float *"
+  		TIM4->CCR4 = Call_PID_Controller_Angle(&Yaw_PID.Enable, Setpoint, Yaw_PID.Current, &Yaw_PID.PartKi,
+..\filestmf405.c\pid05.c(259): warning:  #167-D: argument of type "volatile float *" is incompatible with parameter of type "float *"
+  		Yaw_PID.Kp, Yaw_PID.Ki, Yaw_PID.Kd, 0.01, &Yaw_PID.Pid_Result, &Yaw_PID.PreError,
+..\filestmf405.c\pid05.c(259): warning:  #167-D: argument of type "volatile float *" is incompatible with parameter of type "float *"
+  		Yaw_PID.Kp, Yaw_PID.Ki, Yaw_PID.Kd, 0.01, &Yaw_PID.Pid_Result, &Yaw_PID.PreError,
+..\filestmf405.c\pid05.c(274): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  		init_width_pulse_CH3 / 1000, 1.62 - init_width_pulse_CH3 / 1000, 1.110 - init_width_pulse_CH3 / 1000);
+..\filestmf405.c\pid05.c(274): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  		init_width_pulse_CH3 / 1000, 1.62 - init_width_pulse_CH3 / 1000, 1.110 - init_width_pulse_CH3 / 1000);
+..\filestmf405.c\pid05.c(272): warning:  #167-D: argument of type "volatile bool *" is incompatible with parameter of type "bool *"
+  		TIM4->CCR3 = Call_PID_Controller_Angle(&Alt_PID.Enable, Setpoint, Alt_PID.Current, &Alt_PID.PartKi,
+..\filestmf405.c\pid05.c(272): warning:  #167-D: argument of type "volatile float *" is incompatible with parameter of type "float *"
+  		TIM4->CCR3 = Call_PID_Controller_Angle(&Alt_PID.Enable, Setpoint, Alt_PID.Current, &Alt_PID.PartKi,
+..\filestmf405.c\pid05.c(273): warning:  #167-D: argument of type "volatile float *" is incompatible with parameter of type "float *"
+  		Alt_PID.Kp, Alt_PID.Ki, Alt_PID.Kd, 0.1, &Alt_PID.Pid_Result, &Alt_PID.PreError,
+..\filestmf405.c\pid05.c(273): warning:  #167-D: argument of type "volatile float *" is incompatible with parameter of type "float *"
+  		Alt_PID.Kp, Alt_PID.Ki, Alt_PID.Kd, 0.1, &Alt_PID.Pid_Result, &Alt_PID.PreError,
+..\filestmf405.c\pid05.c(289): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	Pwm =(int)((float)(1.5 + Roll) * 21711 * 73 / 1000);
+..\filestmf405.c\pid05.c(302): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+   	Pwm =(int)((float)(1.56 + Pitch) * 1584903 /1000);
+..\filestmf405.c\pid05.c(311): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	Pwm =(int)((float)(1.5 + Yaw) * 21711 * 73 / 1000);
+..\filestmf405.c\pid05.c(321): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	Pwm =(int)((float)(1.5 + Alt) * 21711 * 73 / 1000);
+..\filestmf405.c\pid05.c(361): warning:  #111-D: statement is unreachable
+  				*PreError = Error;
+..\filestmf405.c\pid05.c(363): warning:  #940-D: missing return statement at end of non-void function "Call_PID_Controller_Angle"
+  }
+..\filestmf405.c\pid05.c: 26 warnings, 0 errors
 linking...
 Program Size: Code=25744 RO-data=1240 RW-data=628 ZI-data=27924  
-".\Project\crc.axf" - 0 Error(s), 0 Warning(s).
-Build Time Elapsed:  00:00:11
+".\Project\crc.axf" - 0 Error(s), 26 Warning(s).
+Build Time Elapsed:  00:00:16
 </pre>
 </body>
 </html>

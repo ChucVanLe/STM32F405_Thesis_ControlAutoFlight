@@ -267,15 +267,16 @@ Output: None
 *******************************************************************************/
 void Call_Alt_PID(float Setpoint)
 {
+	//real time -------------------------------------------------------
+		if(Alt_PID.Enable)
+		TIM4->CCR3 = Call_PID_Controller_Angle(&Alt_PID.Enable, Setpoint, Alt_PID.Current, &Alt_PID.PartKi,
+		Alt_PID.Kp, Alt_PID.Ki, Alt_PID.Kd, 0.1, &Alt_PID.Pid_Result, &Alt_PID.PreError,
+		init_width_pulse_CH3 / 1000, 1.62 - init_width_pulse_CH3 / 1000, 1.110 - init_width_pulse_CH3 / 1000);
+//	//simulate-----------------------------------------------------
 //		if(Alt_PID.Enable)
 //		TIM4->CCR3 = Call_PID_Controller_Angle(&Alt_PID.Enable, Setpoint, Alt_PID.Current, &Alt_PID.PartKi,
 //		Alt_PID.Kp, Alt_PID.Ki, Alt_PID.Kd, 0.1, &Alt_PID.Pid_Result, &Alt_PID.PreError,
-//		init_width_pulse_CH3 / 1000, 1.92 - init_width_pulse_CH3 / 1000, 1.110 - init_width_pulse_CH3 / 1000);
-	//simulate
-			if(Alt_PID.Enable)
-		TIM4->CCR3 = Call_PID_Controller_Angle(&Alt_PID.Enable, Setpoint, Alt_PID.Current, &Alt_PID.PartKi,
-		Alt_PID.Kp, Alt_PID.Ki, Alt_PID.Kd, 0.1, &Alt_PID.Pid_Result, &Alt_PID.PreError,
-		init_width_pulse_CH3 / 1000, 1.26 - init_width_pulse_CH3 / 1000, 1.110 - init_width_pulse_CH3 / 1000);
+//		init_width_pulse_CH3 / 1000, 1.26 - init_width_pulse_CH3 / 1000, 1.110 - init_width_pulse_CH3 / 1000);
 }
 /************************************************************************************************/
 //TIM4->CCR3 = Pwm;//channel 3
