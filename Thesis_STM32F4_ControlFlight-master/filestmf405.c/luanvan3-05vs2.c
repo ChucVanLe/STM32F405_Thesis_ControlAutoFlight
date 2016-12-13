@@ -34,9 +34,8 @@
 uint8_t index_find_e = 0;//variable for reset buffer receive data from GS
 
 uint8_t Buf_rx4[1];
-
 int i = 0;
-
+int32_t clk_1microsec = 0, width_pulse_CH3 = 0;
 /***********************************AnhHuan*******************************************/
 
 char  data_IMU_GPS_CMD_tran_GS[500], Buf_USART2_trandata_to_GS[500];//data_IMU to 100ms tran data to GS
@@ -61,6 +60,7 @@ int main(void)
 		MyGPIO_Configuration();
     EXTI_FPGA_Pa8();
 	//Configure PD2 read width pulse CH3,  external interrput
+		Configure_PD2_Read_Width_Pulse();
     UART4_Configuration(57600);//interface with GS
     USART2_Configuration(460800);//interface with GPS/IMU
     DMA_UART4_Configuration((uint8_t*)Buf_USART2_trandata_to_GS, 500);//receive data from IMU/GPS
@@ -68,7 +68,7 @@ int main(void)
 
     MyTIM_PWM_Configuration();  
        
-//    SysTick_Config(SystemCoreClock/500);//interrupt system 2ms
+    SysTick_Config(SystemCoreClock/2484000);//interrupt system 1 microsec
     GPIO_SetBits(GPIOB,GPIO_Pin_12);
 		//anh Huan_code GPS
 		gps_init(460800);
@@ -99,8 +99,8 @@ int main(void)
 				for(index_find_e = 0; index_find_e < 250; index_find_e ++)
 						data_from_pc[index_find_e] = 0;
 		}
-//update code data IMU 10ms, data GPS 100ms	
-//Anh Huan....................................................
+	//update code data IMU 10ms, data GPS 100ms	
+	//Anh Huan....................................................
 		gps_process();//ok: get roll, pitch, yaw, lat, long, alt,
 		if(control_path_use_stanley)
 			main_control();//control flight use standley
@@ -109,7 +109,11 @@ int main(void)
 }//end main
     
 /**************************************************************************************/
-
+/**************************************************************************************/
+void SysTick_Handler(void)
+ {
+     clk_1microsec++;
+ }
 
 
 

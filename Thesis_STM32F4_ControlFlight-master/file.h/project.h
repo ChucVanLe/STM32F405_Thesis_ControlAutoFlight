@@ -123,6 +123,7 @@ void Interrupt_uart4_rx(void);
 void MyTIM_PWM_Configuration(void);
 void EXTI_FPGA_Pa8(void);
 void Delay_100ms(void);
+void Configure_PD2_Read_Width_Pulse(void);
 /*****************************TickCount  *********************************************/
 
 #endif
