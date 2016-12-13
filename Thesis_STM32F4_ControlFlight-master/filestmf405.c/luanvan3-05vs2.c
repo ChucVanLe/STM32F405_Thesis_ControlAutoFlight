@@ -60,6 +60,7 @@ int main(void)
     PID_Init();
 		MyGPIO_Configuration();
     EXTI_FPGA_Pa8();
+	//Configure PD2 read width pulse CH3
     UART4_Configuration(57600);//interface with GS
     USART2_Configuration(460800);//interface with GPS/IMU
     DMA_UART4_Configuration((uint8_t*)Buf_USART2_trandata_to_GS, 500);//receive data from IMU/GPS
