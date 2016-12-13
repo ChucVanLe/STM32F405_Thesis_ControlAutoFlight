@@ -21,22 +21,53 @@ Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V2.0.18.0
 Dialog DLL:      TCM.DLL V1.14.14.0
  
 <h2>Project:</h2>
-D:\LeVanChuc\OneDrive\Le Van Chuc\code\Thesis_STM32F4_ControlFlight-master_v3\Thesis_STM32F4_ControlFlight-master\MDK-ARM-project\crc.uvproj
+C:\Users\Nguyen Thi Anh Ly\OneDrive\Le Van Chuc\code\Thesis_STM32F4_ControlFlight_v4_Setpoint_Roll_Pitch_Is_0\Thesis_STM32F4_ControlFlight-master\MDK-ARM-project\crc.uvproj
 Project File Date:  11/18/2016
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 3 (build 300)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'CRC'
-compiling gps.c...
+compiling ff.c...
+"no source": Error:  #5: cannot open source input file "..\Sd Card\ff.c": No such file or directory
+..\Sd Card\ff.c: 0 warnings, 1 error
+compiling fattime.c...
+"no source": Error:  #5: cannot open source input file "..\Sd Card\fattime.c": No such file or directory
+..\Sd Card\fattime.c: 0 warnings, 1 error
+compiling ccsbcs.c...
+"no source": Error:  #5: cannot open source input file "..\Sd Card\option\ccsbcs.c": No such file or directory
+..\Sd Card\option\ccsbcs.c: 0 warnings, 1 error
+compiling pid05.c...
 ..\file.h\LL2UTM.h(18): warning:  #1-D: last line of file ends without a newline
    
 ..\file.h\ConnectWithGS.h(18): warning:  #1-D: last line of file ends without a newline
    
-..\filestmf405.c\gps.c: 2 warnings, 0 errors
+..\filestmf405.c\pid05.c(147): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	roll=roll*0.1;
+..\filestmf405.c\pid05.c(155): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	pitch=pitch*0.1;
+..\filestmf405.c\pid05.c(163): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	yaw=yaw*0.1;
+..\filestmf405.c\pid05.c(220): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  		if(Roll_PID.Pid_Result > 0.35) Roll_PID.Pid_Result = 0.35;
+..\filestmf405.c\pid05.c(260): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  		if(Pitch_PID.Pid_Result > 0.29) Pitch_PID.Pid_Result = 0.29;
+..\filestmf405.c\pid05.c(300): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  		if(Yaw_PID.Pid_Result > 0.4) Yaw_PID.Pid_Result = 0.4;
+..\filestmf405.c\pid05.c(365): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	Pwm =(int)((float)(1.5 + Roll) * 21711 * 73 / 1000);
+..\filestmf405.c\pid05.c(378): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+   	Pwm =(int)((float)(1.56 + Pitch) * 1584903 /1000);
+..\filestmf405.c\pid05.c(387): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	Pwm =(int)((float)(1.5 + Yaw) * 21711 * 73 / 1000);
+..\filestmf405.c\pid05.c(397): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	Pwm =(int)((float)(1.5 + Alt) * 21711 * 73 / 1000);
+..\filestmf405.c\pid05.c(406): warning:  #1-D: last line of file ends without a newline
+  }
+..\filestmf405.c\pid05.c: 13 warnings, 0 errors
 linking...
-Program Size: Code=25912 RO-data=1240 RW-data=596 ZI-data=27924  
-".\Project\crc.axf" - 0 Error(s), 2 Warning(s).
-Build Time Elapsed:  00:00:05
+Program Size: Code=25840 RO-data=1240 RW-data=596 ZI-data=27924  
+".\Project\crc.axf" - 0 Error(s), 13 Warning(s).
+Build Time Elapsed:  00:00:20
 </pre>
 </body>
 </html>

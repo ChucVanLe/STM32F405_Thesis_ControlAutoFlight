@@ -182,42 +182,42 @@
         <Ww>
           <count>2</count>
           <WinNumber>1</WinNumber>
-          <ItemText>GPSString[2]</ItemText>
+          <ItemText>IMUStruct.roll</ItemText>
         </Ww>
         <Ww>
           <count>3</count>
           <WinNumber>1</WinNumber>
-          <ItemText>IMUStruct.roll</ItemText>
+          <ItemText>GPSStruct.longitude</ItemText>
         </Ww>
         <Ww>
           <count>4</count>
           <WinNumber>1</WinNumber>
-          <ItemText>GPSStruct.longitude</ItemText>
+          <ItemText>Alt_PID.Current</ItemText>
         </Ww>
         <Ww>
           <count>5</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Alt_PID.Current</ItemText>
+          <ItemText>Alt_PID.Pid_Result</ItemText>
         </Ww>
         <Ww>
           <count>6</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Alt_PID.Pid_Result</ItemText>
+          <ItemText>Alt_PID.SetPoint</ItemText>
         </Ww>
         <Ww>
           <count>7</count>
           <WinNumber>1</WinNumber>
-          <ItemText>GPSStruct.speed</ItemText>
+          <ItemText>GPSStruct.altitude</ItemText>
         </Ww>
         <Ww>
           <count>8</count>
           <WinNumber>1</WinNumber>
-          <ItemText>GPSStruct.altitude</ItemText>
+          <ItemText>len</ItemText>
         </Ww>
         <Ww>
           <count>9</count>
           <WinNumber>1</WinNumber>
-          <ItemText>len</ItemText>
+          <ItemText>data_from_pc</ItemText>
         </Ww>
         <Ww>
           <count>10</count>
@@ -227,15 +227,10 @@
         <Ww>
           <count>11</count>
           <WinNumber>1</WinNumber>
-          <ItemText>data_from_pc</ItemText>
-        </Ww>
-        <Ww>
-          <count>12</count>
-          <WinNumber>1</WinNumber>
           <ItemText>UTMLetter</ItemText>
         </Ww>
         <Ww>
-          <count>13</count>
+          <count>12</count>
           <WinNumber>1</WinNumber>
           <ItemText>data_from_pc</ItemText>
         </Ww>
@@ -254,17 +249,17 @@
         <Ww>
           <count>2</count>
           <WinNumber>2</WinNumber>
-          <ItemText>Alt_PID.Pid_Result</ItemText>
+          <ItemText>Roll_PID.Pid_Result</ItemText>
         </Ww>
         <Ww>
           <count>3</count>
           <WinNumber>2</WinNumber>
-          <ItemText>Alt_PID.SetPoint</ItemText>
+          <ItemText>Roll_PID.SetPoint</ItemText>
         </Ww>
         <Ww>
           <count>4</count>
           <WinNumber>2</WinNumber>
-          <ItemText>Alt_PID.Current</ItemText>
+          <ItemText>Roll_PID.Current</ItemText>
         </Ww>
         <Ww>
           <count>5</count>
@@ -433,7 +428,7 @@
       <GroupNumber>3</GroupNumber>
       <FileNumber>8</FileNumber>
       <FileType>1</FileType>
-      <tvExp>0</tvExp>
+      <tvExp>1</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>..\lib\src\stm32f4xx_flash.c</PathWithFileName>

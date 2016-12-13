@@ -437,13 +437,13 @@ void EXTI9_5_IRQHandler(void)
     if(EXTI_GetITStatus(EXTI_Line8) != RESET)
     {
 		//get setpoint
-		Roll_PID.SetPoint = Roll_PID.Current;
+		Roll_PID.SetPoint = 0;
 		//reset variable
 		Roll_PID.PartKi = 0;
 		Roll_PID.PreError = 0;
 		Roll_PID.Pid_Result = 0;
 		//get setpoint
-		Pitch_PID.SetPoint = Pitch_PID.Current;
+		Pitch_PID.SetPoint = 0;
 		//reset variable
 		Pitch_PID.PartKi = 0;
 		Pitch_PID.PreError = 0;
