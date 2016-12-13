@@ -10,7 +10,7 @@ PID_Index Speed;
 
 PID_Index Press;
 
-
+float init_width_pulse_CH3;
 void PID_Init(void)
 {
 	Roll_PID.Error = Roll_PID.PreError = 0;
@@ -195,7 +195,12 @@ uk = u(k - 1)+ a0 * e(k) + a1 * e(k - 1) + a2 * e(k - 2)
 *******************************************************************************/
 void Call_Roll_PID(float Setpoint)
 {
-	if(Roll_PID.Enable)
+	
+//		if(Roll_PID.Enable)
+//		TIM4->CCR1 = Call_PID_Controller_Angle(&Roll_PID.Enable, Setpoint, Roll_PID.Current, &Roll_PID.PartKi,
+//		Roll_PID.Kp, Roll_PID.Ki, Roll_PID.Kd, 0.01, &Roll_PID.Pid_Result, &Roll_PID.PreError,
+//		1.5, 0.4, -0.42);
+		if(Roll_PID.Enable)
 	{
 		//at manual --> auto, get setpoint is current
 
@@ -217,7 +222,7 @@ void Call_Roll_PID(float Setpoint)
 		//PartKd = Kd * (Error - PreError) / Time_sample;
 		Roll_PID.Pid_Result += Roll_PID.Kp * Roll_PID.Error + Roll_PID.PartKi + Roll_PID.Kd * (Roll_PID.Error - Roll_PID.PreError) / Time_sample;
 		//limit
-		if(Roll_PID.Pid_Result > 0.35) Roll_PID.Pid_Result = 0.35;
+		if(Roll_PID.Pid_Result > 0.4) Roll_PID.Pid_Result = 0.4;
 		if(Roll_PID.Pid_Result < -0.42) Roll_PID.Pid_Result = -0.42;
 		// Dat gia tri vao PWM	
 		Gent_Pwm_Roll(-Roll_PID.Pid_Result);
@@ -235,36 +240,10 @@ Output: None
 *******************************************************************************/
 void Call_Pitch_PID(float Setpoint)
 {
-	if(Pitch_PID.Enable)
-	{
-		//at manual --> auto, get setpoint is current
-
-		Pitch_PID.Enable = 0;
-		Pitch_PID.Error = Setpoint - Pitch_PID.Current;
-
-		//limit -180, 180
-		if (Pitch_PID.Error > 180)
-			Pitch_PID.Error -= 360;
-		if (Pitch_PID.Error < -180)
-			Pitch_PID.Error += 360;
-		//PID_ThanhTan
-		//Pitch_PID.Pid_Result_Temp=Pitch_PID.Pid_Result;
-		//Pitch_PID.Pid_Result=Pitch_PID.Pid_Result_Temp+Pitch_PID.a0*Pitch_PID.e[2]+Pitch_PID.a1*Pitch_PID.e[1]	+Pitch_PID.a2*Pitch_PID.e[0];
-		//new pid controller
-		Pitch_PID.PartKi += Pitch_PID.Ki * Pitch_PID.Error * Time_sample;
-		//PartKp = Kp * Error
-		//PartKi += Ki * Error * Time_sample;
-		//PartKd = Kd * (Error - PreError) / Time_sample;
-		Pitch_PID.Pid_Result += Pitch_PID.Kp * Pitch_PID.Error + Pitch_PID.PartKi + Pitch_PID.Kd * (Pitch_PID.Error - Pitch_PID.PreError) / Time_sample;
-		//limit
-		if(Pitch_PID.Pid_Result > 0.29) Pitch_PID.Pid_Result = 0.29;
-		if(Pitch_PID.Pid_Result < -0.41) Pitch_PID.Pid_Result = -0.41;
-		// Dat gia tri vao PWM	
-		Gent_Pwm_Pitch(Pitch_PID.Pid_Result);
-				
-		Pitch_PID.PreError = Pitch_PID.Error;
-	}
-	else return;
+		if(Pitch_PID.Enable)
+		TIM4->CCR2 = Call_PID_Controller_Angle(&Pitch_PID.Enable, Setpoint, Pitch_PID.Current, &Pitch_PID.PartKi,
+		Pitch_PID.Kp, Pitch_PID.Ki, Pitch_PID.Kd, 0.01, &Pitch_PID.Pid_Result, &Pitch_PID.PreError,
+		1.56, 0.48, -0.34);
 }
 
 /*******************************************************************************
@@ -275,36 +254,10 @@ Output: None
 *******************************************************************************/
 void Call_Yaw_PID(float Setpoint)
 {
-	if(Yaw_PID.Enable)
-	{
-		//at manual --> auto, get setpoint is current
-
-		Yaw_PID.Enable = 0;
-		Yaw_PID.Error = Setpoint - Yaw_PID.Current;
-
-		//limit -180, 180
-		if (Yaw_PID.Error > 180)
-			Yaw_PID.Error -= 360;
-		if (Yaw_PID.Error < -180)
-			Yaw_PID.Error += 360;
-		//PID_ThanhTan
-		//Yaw_PID.Pid_Result_Temp=Yaw_PID.Pid_Result;
-		//Yaw_PID.Pid_Result=Yaw_PID.Pid_Result_Temp+Yaw_PID.a0*Yaw_PID.e[2]+Yaw_PID.a1*Yaw_PID.e[1]	+Yaw_PID.a2*Yaw_PID.e[0];
-		//new pid controller
-		Yaw_PID.PartKi += Yaw_PID.Ki * Yaw_PID.Error * Time_sample;
-		//PartKp = Kp * Error
-		//PartKi += Ki * Error * Time_sample;
-		//PartKd = Kd * (Error - PreError) / Time_sample;
-		Yaw_PID.Pid_Result += Yaw_PID.Kp * Yaw_PID.Error + Yaw_PID.PartKi + Yaw_PID.Kd * (Yaw_PID.Error - Yaw_PID.PreError) / Time_sample;
-		//limit
-		if(Yaw_PID.Pid_Result > 0.4) Yaw_PID.Pid_Result = 0.4;
-		if(Yaw_PID.Pid_Result < -0.26) Yaw_PID.Pid_Result = -0.26;
-		// Dat gia tri vao PWM	
-		Gent_Pwm_Yaw(Yaw_PID.Pid_Result);
-				
-		Yaw_PID.PreError = Yaw_PID.Error;
-	}
-	else return;
+		if(Yaw_PID.Enable)
+		TIM4->CCR4 = Call_PID_Controller_Angle(&Yaw_PID.Enable, Setpoint, Yaw_PID.Current, &Yaw_PID.PartKi,
+		Yaw_PID.Kp, Yaw_PID.Ki, Yaw_PID.Kd, 0.01, &Yaw_PID.Pid_Result, &Yaw_PID.PreError,
+		1.52, 0.44, -0.4);
 }
 /*******************************************************************************
 Function name: Call_Alt_PID
@@ -314,45 +267,15 @@ Output: None
 *******************************************************************************/
 void Call_Alt_PID(float Setpoint)
 {
-	float Time_sample_GPS = 0.1;
-
-		if(Alt_PID.Enable)
-		{
-			//if(1 == state_alt)
-			{
-				//at manual --> auto, get setpoint is current
-
-				Alt_PID.Enable = 0;
-				Alt_PID.Error = Setpoint - Alt_PID.Current;
-
-				//limit -180, 180
-//				if (Alt_PID.Error > 180)
-//					Alt_PID.Error -= 360;
-//				if (Alt_PID.Error < -180)
-//					Alt_PID.Error += 360;
-				//PID_ThanhTan
-				//Alt_PID.Pid_Result_Temp=Alt_PID.Pid_Result;
-				//Alt_PID.Pid_Result=Alt_PID.Pid_Result_Temp+Alt_PID.a0*Alt_PID.e[2]+Alt_PID.a1*Alt_PID.e[1]	+Alt_PID.a2*Alt_PID.e[0];
-				//new pid controller
-				Alt_PID.PartKi += Alt_PID.Ki * Alt_PID.Error * Time_sample_GPS;
-				//PartKp = Kp * Error
-				//PartKi += Ki * Error * Time_sample;
-				//PartKd = Kd * (Error - PreError) / Time_sample;
-				Alt_PID.Pid_Result += Alt_PID.Kp * Alt_PID.Error + Alt_PID.PartKi + Alt_PID.Kd * (Alt_PID.Error - Alt_PID.PreError) / Time_sample_GPS;
-				//limit at real time
-				if(Alt_PID.Pid_Result > -0.0) Alt_PID.Pid_Result = 0.0;
-				if(Alt_PID.Pid_Result < -0.36) Alt_PID.Pid_Result = -0.36;
-				//limit at simulate
-//				if(Alt_PID.Pid_Result > -0.25) Alt_PID.Pid_Result = -0.25;
-//				if(Alt_PID.Pid_Result < -0.36) Alt_PID.Pid_Result = -0.36;
-				// Dat gia tri vao PWM	
-				Gent_Pwm_Alt(Alt_PID.Pid_Result);
-						
-				Alt_PID.PreError = Alt_PID.Error;
-			}
-
-		}
-		else return;
+//		if(Alt_PID.Enable)
+//		TIM4->CCR3 = Call_PID_Controller_Angle(&Alt_PID.Enable, Setpoint, Alt_PID.Current, &Alt_PID.PartKi,
+//		Alt_PID.Kp, Alt_PID.Ki, Alt_PID.Kd, 0.1, &Alt_PID.Pid_Result, &Alt_PID.PreError,
+//		init_width_pulse_CH3 / 1000, 1.92 - init_width_pulse_CH3 / 1000, 1.110 - init_width_pulse_CH3 / 1000);
+	//simulate
+			if(Alt_PID.Enable)
+		TIM4->CCR3 = Call_PID_Controller_Angle(&Alt_PID.Enable, Setpoint, Alt_PID.Current, &Alt_PID.PartKi,
+		Alt_PID.Kp, Alt_PID.Ki, Alt_PID.Kd, 0.1, &Alt_PID.Pid_Result, &Alt_PID.PreError,
+		init_width_pulse_CH3 / 1000, 1.26 - init_width_pulse_CH3 / 1000, 1.110 - init_width_pulse_CH3 / 1000);
 }
 /************************************************************************************************/
 //TIM4->CCR3 = Pwm;//channel 3
@@ -396,11 +319,44 @@ void Gent_Pwm_Alt(float Alt)
 	int Pwm ;
 	Pwm =(int)((float)(1.5 + Alt) * 21711 * 73 / 1000);
 	//limit
-	//1.24 - 1.5 <= Alt <= 1.92 - 1.5
+	//1.110 - 1.5 <= Alt <= 1.92 - 1.5
 //	if(Pwm > 3043) Pwm = 3043;//Pulse = 1.92ms
-//	if(Pwm < 1743) Pwm = 1743;//Pulse = 1.24ms
+//	if(Pwm < 1759) Pwm = 1759;//Pulse = 1.110ms
 	//test simulate
 	if(Pwm > 2694) Pwm = 2694;//Pulse = 1.7ms
-	if(Pwm < 1743) Pwm = 1743;//Pulse = 1.24ms
+	if(Pwm < 1759) Pwm = 1759;//Pulse = 1.110ms
 	TIM4->CCR3 = Pwm;
+}
+
+int32_t Call_PID_Controller_Angle(bool *Enable, float Setpoint, float Current, float *PartKi, 
+	float Kp, float Ki, float Kd, float	Time_sample_GPS, float *Pid_Result, float *PreError, 
+		float init_center_value, float limit_up_output, float limit_down_output)
+{
+		float Error; 
+		if(*Enable)
+		{
+				//at manual --> auto, get setpoint is current
+			*Enable = 0;
+			Error = Setpoint - Current;
+
+				//limit -180, 180
+			if (Error > +180) Error -= 360;
+			if (Error < -180) Error += 360;
+
+				//at manual --> auto, get setpoint is current
+
+				//new pid controller
+				*PartKi += Ki * Error * Time_sample_GPS;
+				//PartKp = Kp * Error
+				//PartKi += Ki * Error * Time_sample;
+				//PartKd = Kd * (Error - PreError) / Time_sample;
+				*Pid_Result += Kp * Error + *PartKi + Kd * (Error - *PreError) / Time_sample_GPS;
+				//limit at real time
+				if(*Pid_Result > limit_up_output) *Pid_Result = limit_up_output;
+				if(*Pid_Result < limit_down_output) *Pid_Result = limit_down_output;
+
+				// Dat gia tri vao PWM	
+				return (int)((float)(init_center_value + *Pid_Result) * 21711 * 73 / 1000);
+				*PreError = Error;
+		}
 }

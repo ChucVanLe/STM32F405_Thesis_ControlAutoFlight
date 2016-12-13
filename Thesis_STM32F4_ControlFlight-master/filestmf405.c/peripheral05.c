@@ -10,6 +10,7 @@
 	/**************************************************************************************/
 	uint64_t TickCnt;
 	extern int32_t clk_1microsec,width_pulse_CH3;
+	extern float	init_width_pulse_CH3;
 	/**************************************************************************************/
 	void Delay_100ms(void) 
 	{
@@ -455,6 +456,7 @@ void EXTI9_5_IRQHandler(void)
 		Yaw_PID.Pid_Result = 0;
 		//get setpoint
 		Alt_PID.SetPoint = Alt_PID.Current;
+		init_width_pulse_CH3 = (float)width_pulse_CH3;
 		//reset variable
 		Alt_PID.PartKi = 0;
 		Alt_PID.PreError = 0;
@@ -585,6 +587,7 @@ void EXTI15_10_IRQHandler(void)
     {
 		  if (!GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_15))
 				{
+					if((1000 < clk_1microsec) && (2000 > clk_1microsec))
 					width_pulse_CH3 = clk_1microsec;
 				}
 		clk_1microsec = 0;

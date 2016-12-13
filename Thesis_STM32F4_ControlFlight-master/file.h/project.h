@@ -76,7 +76,7 @@ typedef struct
 	volatile float PartKi;//PartKi = Ki * Error * T
 	volatile float SetPoint;
 	volatile float Current;
-	volatile uint8_t Enable;//Enable = 1 when get data from IMU/GPS
+	volatile bool Enable;//Enable = 1 when get data from IMU/GPS
 	volatile bool Switch_manual_auto;//switch_manual_auto = 1--> manual convert to auto have received paramater from CS, setpoint receive from GS
 	//switch_manual_auto = 0; manual convert to auto have not received paramater from CS yet --> setpoint is current value at manual convert to auto
 }PID_Index;
@@ -124,7 +124,11 @@ void MyTIM_PWM_Configuration(void);
 void EXTI_FPGA_Pa8(void);
 void Delay_100ms(void);
 void Configure_PD2_Read_Width_Pulse(void);
-void Configure_PB15_Read_Width_Pulse(void); 
+void Configure_PB15_Read_Width_Pulse(void);
+int32_t Gent_Pwm(float output, float init_center_value, float limit_up, float limit_down);
+int32_t Call_PID_Controller_Angle(bool *Enable, float Setpoint, float Current, float* PartKi, 
+	float Kp, float Ki, float Kd, float	Time_sample_GPS, float* Pid_Result, float* PreError, 
+		float init_center_value, float limit_up_output, float limit_down_output);
 /*****************************TickCount  *********************************************/
 
 #endif
