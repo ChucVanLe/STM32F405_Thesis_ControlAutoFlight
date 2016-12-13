@@ -70,7 +70,7 @@ int main(void)
     MyTIM_PWM_Configuration();  
        
     SysTick_Config(SystemCoreClock/1000000);//interrupt system 1 microsec
-    //GPIO_SetBits(GPIOB,GPIO_Pin_12);
+    GPIO_SetBits(GPIOB,GPIO_Pin_12);
 		//anh Huan_code GPS
 		gps_init(460800);
 		//Configure PB15 read width pulse CH3,  external interrput
