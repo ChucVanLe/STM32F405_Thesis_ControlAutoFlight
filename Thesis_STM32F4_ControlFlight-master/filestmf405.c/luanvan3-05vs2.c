@@ -60,7 +60,8 @@ int main(void)
 		MyGPIO_Configuration();
     EXTI_FPGA_Pa8();
 	//Configure PD2 read width pulse CH3,  external interrput
-		Configure_PD2_Read_Width_Pulse();
+		//Configure_PD2_Read_Width_Pulse();
+
     UART4_Configuration(57600);//interface with GS
     USART2_Configuration(460800);//interface with GPS/IMU
     DMA_UART4_Configuration((uint8_t*)Buf_USART2_trandata_to_GS, 500);//receive data from IMU/GPS
@@ -68,10 +69,12 @@ int main(void)
 
     MyTIM_PWM_Configuration();  
        
-    SysTick_Config(SystemCoreClock/2484000);//interrupt system 1 microsec
-    GPIO_SetBits(GPIOB,GPIO_Pin_12);
+    SysTick_Config(SystemCoreClock/1000000);//interrupt system 1 microsec
+    //GPIO_SetBits(GPIOB,GPIO_Pin_12);
 		//anh Huan_code GPS
 		gps_init(460800);
+		//Configure PB15 read width pulse CH3,  external interrput
+		Configure_PB15_Read_Width_Pulse();
     while(1)
     {
         if (GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_8))//auto control

@@ -46,12 +46,12 @@
 	
   
     /* Configure PB12 PB13, pb14, pb15 in output pushpull mode */
-    GPIO_InitStructure.GPIO_Pin =GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
-    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
-    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-    GPIO_Init(GPIOB, &GPIO_InitStructure);
+//    GPIO_InitStructure.GPIO_Pin =GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15;
+//    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+//    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+//    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
+//    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+//    GPIO_Init(GPIOB, &GPIO_InitStructure);
  
 		/*-------------------------- GPIO Configuration ----------------------------*/
 		GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1; // PA.0 UART4_TX, potential clash SCLK CS43L22
@@ -521,6 +521,7 @@ void EXTI2_IRQHandler(void) {
 		/* Do your stuff when PD0 is changed */
 		  if (!GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_2))
 				{
+					if((1000 < clk_1microsec) && (2000 > clk_1microsec))
 					width_pulse_CH3 = clk_1microsec;
 				}
 		clk_1microsec = 0;
@@ -528,3 +529,68 @@ void EXTI2_IRQHandler(void) {
 		EXTI_ClearITPendingBit(EXTI_Line2);
 	}
 }
+
+	/* Configure pins to be interrupts */
+void Configure_PB15_Read_Width_Pulse(void) 
+	{
+	/* Set variables used */
+	GPIO_InitTypeDef GPIO_InitStruct;
+	EXTI_InitTypeDef EXTI_InitStruct;
+	NVIC_InitTypeDef NVIC_InitStruct;
+	
+	/* Enable clock for GPIOB */
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE);
+	/* Enable clock for SYSCFG */
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
+	
+	/* Set pin as input */
+	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IN;
+	GPIO_InitStruct.GPIO_OType = GPIO_OType_PP;
+	GPIO_InitStruct.GPIO_Pin = GPIO_Pin_0;
+	GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_UP;
+	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_100MHz;
+	GPIO_Init(GPIOB, &GPIO_InitStruct);
+	
+	/* Tell system that you will use PD0 for EXTI_Line0 */
+	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOB, EXTI_PinSource15);
+	
+	/* PD0 is connected to EXTI_Line0 */
+	EXTI_InitStruct.EXTI_Line = EXTI_Line15;
+	/* Enable interrupt */
+	EXTI_InitStruct.EXTI_LineCmd = ENABLE;
+	/* Interrupt mode */
+	EXTI_InitStruct.EXTI_Mode = EXTI_Mode_Interrupt;
+	/* Triggers on rising and falling edge */
+	EXTI_InitStruct.EXTI_Trigger = EXTI_Trigger_Rising_Falling;
+	/* Add to EXTI */
+	EXTI_Init(&EXTI_InitStruct);
+
+	/* Add IRQ vector to NVIC */
+	/* PD0 is connected to EXTI_Line0, which has EXTI0_IRQn vector */
+	NVIC_InitStruct.NVIC_IRQChannel = EXTI15_10_IRQn;
+	/* Set priority */
+	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 0x00;
+	/* Set sub priority */
+	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 0x00;
+	/* Enable interrupt */
+	NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
+	/* Add to NVIC */
+	NVIC_Init(&NVIC_InitStruct);
+}
+
+
+void EXTI15_10_IRQHandler(void)
+  {
+    if(EXTI_GetITStatus(EXTI_Line15) != RESET)
+    {
+		  if (!GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_15))
+				{
+					width_pulse_CH3 = clk_1microsec;
+				}
+		clk_1microsec = 0;
+	/* Clear interrupt flag */
+		EXTI_ClearITPendingBit(EXTI_Line15);
+	  }
+
+  }
+
