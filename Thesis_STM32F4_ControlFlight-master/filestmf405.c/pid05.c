@@ -268,6 +268,42 @@ void Call_Pitch_PID(float Setpoint)
 }
 
 /*******************************************************************************
+Function name: Call_Pitch_PID
+Decription: 
+Input: 
+Output: None
+*******************************************************************************/
+void Call_Speed_PID(float Setpoint)
+{
+	if(Speed.Enable)
+	{
+		//at manual --> auto, get setpoint is current
+
+		Speed.Enable = 0;
+		Speed.Error = Setpoint - Speed.Current;
+
+		//limit -180, 180
+
+		//PID_ThanhTan
+		//Speed.Pid_Result_Temp=Speed.Pid_Result;
+		//Speed.Pid_Result=Speed.Pid_Result_Temp+Speed.a0*Speed.e[2]+Speed.a1*Speed.e[1]	+Speed.a2*Speed.e[0];
+		//new pid controller
+		Speed.PartKi += Speed.Ki * Speed.Error * Time_sample;
+		//PartKp = Kp * Error
+		//PartKi += Ki * Error * Time_sample;
+		//PartKd = Kd * (Error - PreError) / Time_sample;
+		Speed.Pid_Result += Speed.Kp * Speed.Error + Speed.PartKi + Speed.Kd * (Speed.Error - Speed.PreError) / Time_sample;
+		//limit
+		if(Speed.Pid_Result > 0.29) Speed.Pid_Result = 0.29;
+		if(Speed.Pid_Result < -0.41) Speed.Pid_Result = -0.41;
+		// Dat gia tri vao PWM	
+		Gent_Pwm_Pitch(Speed.Pid_Result);
+				
+		Speed.PreError = Speed.Error;
+	}
+	else return;
+}
+/*******************************************************************************
 Function name: Call_Yaw_PID
 Decription: Ham PID vi tri dong co theo gia tri xung encoder
 Input: p_set

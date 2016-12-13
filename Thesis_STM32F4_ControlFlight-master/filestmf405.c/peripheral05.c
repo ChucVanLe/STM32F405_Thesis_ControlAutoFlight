@@ -460,6 +460,8 @@ void EXTI9_5_IRQHandler(void)
 		Alt_PID.PartKi = 0;
 		Alt_PID.PreError = 0;
 		Alt_PID.Pid_Result = 0;
+		//get setpoint
+		Speed.SetPoint = Speed.Current;
 	/* Clear interrupt flag */
 		EXTI_ClearITPendingBit(EXTI_Line8);
 	  }

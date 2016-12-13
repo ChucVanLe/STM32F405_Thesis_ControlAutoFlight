@@ -101,6 +101,7 @@ void Gent_Pwm_Roll(float Roll);
 void Gent_Pwm_Pitch(float Pitch);
 void Gent_Pwm_Yaw(float Yaw);
 void Gent_Pwm_Alt(float Alt);
+void Call_Speed_PID(float Setpoint);
 
 /*****************************Peripheral Function*********************************************/
 float trituyetdoi(float a);

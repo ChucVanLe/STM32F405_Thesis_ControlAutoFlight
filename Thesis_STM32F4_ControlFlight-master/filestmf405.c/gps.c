@@ -281,7 +281,9 @@ void gps_parse(uint8_t *gps_str)
         {
             p = (char*)&gps_str[ind0];
             GPSStruct.speed = atof(p);
-            GPSStruct.speed *= 1.852f; // knot to km/h 
+            GPSStruct.speed *= 1.852f; // knot to km/h
+						Speed.Current = GPSStruct.speed;
+						Speed.Enable = 1;
         }
         else
         {

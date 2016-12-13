@@ -73,10 +73,12 @@ int main(void)
 		gps_init(460800);
     while(1)
     {
-        if (GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_8))//auto control
-					{//test ok:21/11/2016
+       if (GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_8))//auto control
+				{//test ok:21/11/2016
 						Call_Roll_PID(Roll_PID.SetPoint);   
-						Call_Pitch_PID(Pitch_PID.SetPoint);
+						//Call_Pitch_PID(Pitch_PID.SetPoint);
+					//use pitch angle to control velocity
+					Call_Speed_PID(Speed.SetPoint);
 						Call_Yaw_PID(Yaw_PID.SetPoint);
 						//real-time
 						Call_Alt_PID(Alt_PID.SetPoint);		
@@ -86,23 +88,23 @@ int main(void)
 		//-------------------get current value IMU/GPS----------------------------------
 		//--------------------tran data to GS-------------------------------------------
 		//---------------------receive data from GS-------------------------------------
-		if(CMD_Trigger) //receive enough 1 frame command
-		{//if CMD_Trigger = 1 ; receive data from ground station 
-				Delay_100ms();
-				receive_data_and_reply(&data_from_pc[0]);
-			  Delay_100ms();
+			if(CMD_Trigger) //receive enough 1 frame command
+			{//if CMD_Trigger = 1 ; receive data from ground station 
+					Delay_100ms();
+					receive_data_and_reply(&data_from_pc[0]);
+					Delay_100ms();
 
-				//reset data buffer
-				CMD_Trigger = false;
-				CMD_Start_frame = false;
-				for(index_find_e = 0; index_find_e < 250; index_find_e ++)
-						data_from_pc[index_find_e] = 0;
-		}
-//update code data IMU 10ms, data GPS 100ms	
-//Anh Huan....................................................
-		gps_process();//ok: get roll, pitch, yaw, lat, long, alt,
-		if(control_path_use_stanley)
-			main_control();//control flight use standley
+					//reset data buffer
+					CMD_Trigger = false;
+					CMD_Start_frame = false;
+					for(index_find_e = 0; index_find_e < 250; index_find_e ++)
+							data_from_pc[index_find_e] = 0;
+			}
+	//update code data IMU 10ms, data GPS 100ms	
+	//Anh Huan....................................................
+			gps_process();//ok: get roll, pitch, yaw, lat, long, alt,
+			if(control_path_use_stanley)
+				main_control();//control flight use standley
 			        
     }// end while
 }//end main
