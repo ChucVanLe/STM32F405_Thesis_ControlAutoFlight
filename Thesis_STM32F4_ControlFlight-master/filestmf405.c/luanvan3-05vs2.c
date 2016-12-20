@@ -105,7 +105,7 @@ int main(void)
 	//update code data IMU 10ms, data GPS 100ms	
 	//Anh Huan....................................................
 		gps_process();//ok: get roll, pitch, yaw, lat, long, alt,
-		if(control_path_use_stanley)
+		//if(control_path_use_stanley)
 			main_control();//control flight use standley
 			        
     }// end while

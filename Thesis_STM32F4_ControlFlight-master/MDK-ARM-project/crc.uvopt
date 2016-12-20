@@ -240,8 +240,8 @@
       <MemoryWindow1>
         <Mm>
           <WinNumber>1</WinNumber>
-          <SubType>8</SubType>
-          <ItemText>data_IMU_GPS_CMD_tran_GS</ItemText>
+          <SubType>264</SubType>
+          <ItemText>GPSRxBuf</ItemText>
           <AccSizeX>0</AccSizeX>
         </Mm>
       </MemoryWindow1>
