@@ -187,17 +187,22 @@
         <Ww>
           <count>3</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Alt_PID.Pid_Result</ItemText>
+          <ItemText>xp</ItemText>
         </Ww>
         <Ww>
           <count>4</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Alt_PID.SetPoint</ItemText>
+          <ItemText>yp</ItemText>
         </Ww>
         <Ww>
           <count>5</count>
           <WinNumber>1</WinNumber>
-          <ItemText>data_from_pc</ItemText>
+          <ItemText>steer_angle</ItemText>
+        </Ww>
+        <Ww>
+          <count>6</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>IMUStruct.yaw</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>

@@ -104,7 +104,7 @@ void Gent_Pwm_Alt(float Alt);
 
 /*****************************Peripheral Function*********************************************/
 float trituyetdoi(float a);
-extern uint8_t Buf_UART4[],Buf_rx4[],Buf1_rx4[];
+
 
 extern  USART_InitTypeDef USART_InitStructure;
 extern uint64_t TickCnt;
@@ -129,6 +129,9 @@ int32_t Gent_Pwm(float output, float init_center_value, float limit_up, float li
 int32_t Call_PID_Controller_Angle(bool *Enable, float Setpoint, float Current, float* PartKi, 
 	float Kp, float Ki, float Kd, float	Time_sample_GPS, float* Pid_Result, float* PreError, 
 		float init_center_value, float limit_up_output, float limit_down_output);
+void config_uart_2_4(void);
+void reset_buffer_data_receive_data(void);
+void config_gpio_and_interrupt(void);
 /*****************************TickCount  *********************************************/
 
 #endif

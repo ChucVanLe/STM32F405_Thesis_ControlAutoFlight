@@ -7,10 +7,23 @@ uint8_t index_receive_enough_data_GS = 0;//counter number of char from GS
 extern char  data_IMU_GPS_CMD_tran_GS[500];//data_IMU to 100ms tran data to GS
 uint8_t number_byte_respone_to_GS = 0;
 extern bool CMD_Trigger, CMD_Start_frame;//mode tran data to ground station or receive data from GS,CMD_Trigger = true: receive data from GS
-extern char data_from_pc[250];
-bool control_path_use_stanley = false, switch_to_control_flight_use_standley = false;
+char data_from_pc[250];
+bool control_path_use_stanley = false, switch_to_control_flight_use_standley = true;
+extern uint8_t Buf_rx4[];
+uint8_t index_find_e = 0;//variable for reset buffer receive data from GS
 #define		BUFF_SIZE			1//interrupt UART_DMA when receive BUFF_SIZE from GS
 //------------------------------
+void reset_buffer_data_receive_data(void)
+{
+				Delay_100ms();
+				receive_data_and_reply(&data_from_pc[0]);
+			  Delay_100ms();
+				//reset data buffer
+				CMD_Trigger = false;
+				CMD_Start_frame = false;
+				for(index_find_e = 0; index_find_e < 250; index_find_e ++)
+						data_from_pc[index_find_e] = 0;
+}
 void receive_data_and_reply(char *buffer)
 {
 	uint8_t i = 0, index_array_lat_lon = 0;

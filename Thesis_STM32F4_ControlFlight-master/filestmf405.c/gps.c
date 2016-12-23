@@ -50,7 +50,7 @@ float gps_speed[10];
 uint8_t length_data_IMU_GPS_CMD_tran_GS = 0;
 #define GPS_RX_DMA_STREAM     DMA1_Stream5
 uint32_t tick1ms = 0;
-extern bool CMD_Start_frame;
+bool CMD_Start_frame;
 /******************************************************************************
  * 							   PUBLIC FUNCTION                                *
  ******************************************************************************/

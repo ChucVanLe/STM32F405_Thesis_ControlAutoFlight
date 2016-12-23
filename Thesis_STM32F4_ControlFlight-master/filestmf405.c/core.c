@@ -216,7 +216,7 @@ void steer_init(void)
  ******************************************************************************/
 void steer_set(real32_t *angle)
 {
-    SteerAngleSet = (*angle);//set yaw angle.
+		Gent_Pwm_Yaw(-(*angle) * 0.8 / 90);
 }
 
 /******************************************************************************
@@ -247,7 +247,9 @@ void get_wp_index()
 {
 	real64_t d_min, d;
 	int i;
-	for (i = 0; i < NUM_WAYPOINT; i++)//get position flight across from GS
+	offset_x = utm_lat_long_from_GS[0][0];
+	offset_y = utm_lat_long_from_GS[0][1];
+	for (i = 1; i < NUM_WAYPOINT; i++)//get position flight across from GS
 	{
 		WAYPOINT[i].x = utm_lat_long_from_GS[i][0];
 		WAYPOINT[i].y = utm_lat_long_from_GS[i][1];
@@ -539,7 +541,13 @@ void car_control(void)
 
 			// Controller here
 				#warning get xp,yp from gps msg
-
+//when receive hexagon from GS-->control_path_use_stanley = true.
+				if (switch_to_control_flight_use_standley)
+				{
+					switch_to_control_flight_use_standley = false;
+					//get hexagon from GS
+					get_wp_index();//waypoint is point flight accross
+				}
 				LatLong2UTM(GPSStruct.latitude, GPSStruct.longitude, 
 										&yp, &xp, &UTMLetter);
 				//test
@@ -548,13 +556,7 @@ void car_control(void)
 				//result --ok			
 				xp -= offset_x;
 				yp -= offset_y;
-//when receive hexagon from GS-->control_path_use_stanley = true.
-				if (switch_to_control_flight_use_standley)
-				{
-					switch_to_control_flight_use_standley = false;
-					//get hexagon from GS
-					get_wp_index();//waypoint is point flight accross
-				}
+
 			
         fdist = sqrt((xp - wpx2) * (xp - wpx2) + (yp - wpy2) * (yp - wpy2));
 				if (fdist < R1)//change trajectory								
@@ -598,7 +600,7 @@ void car_control(void)
 				
 				//dir = IMUStruct.yaw * DEGREE2RAD;
 				//do may bay troi nen goc yaw khac heading, ta lay goc heading la huong cua vecto van toc
-				dir = GPSStruct.heading * DEGREE2RAD;
+				dir = IMUStruct.yaw * DEGREE2RAD;
 				while (fabsf((float)dir) > PI)//-PI <= yaw <= PI
 				{
 					if (dir < -1.0*PI)

@@ -9,8 +9,11 @@
 	#include "project.h"
 	/**************************************************************************************/
 	uint64_t TickCnt;
-	extern int32_t clk_1microsec,width_pulse_CH3;
+	int32_t width_pulse_CH3;
+	extern int32_t clk_1microsec;
 	extern float	init_width_pulse_CH3;
+	uint8_t Buf_rx4[];
+	char  data_IMU_GPS_CMD_tran_GS[500], Buf_USART2_trandata_to_GS[500];//data_IMU to 100ms tran data to GS
 	/**************************************************************************************/
 	void Delay_100ms(void) 
 	{
@@ -235,7 +238,34 @@ void NVIC_Configuration(void)
   NVIC_Init(&NVIC_InitStructure);
 }
 /**************************************************************************************/
-
+//config uart 2_PA2, PA3, uart 4: PA0, PA1
+void config_uart_2_4(void)
+{
+	  UART4_Configuration(57600);//interface with GS
+    USART2_Configuration(460800);//interface with GPS/IMU
+    DMA_UART4_Configuration((uint8_t*)Buf_USART2_trandata_to_GS, 500);//receive data from IMU/GPS
+    DMA_UART4_RX(Buf_rx4, 1);//receive data from GS
+		//anh Huan_code GPS
+		gps_init(460800);
+}
+void config_gpio_and_interrupt(void)
+{
+	  Delay_100ms();
+		MyRCC_Configuration();
+    Delay_100ms();
+    NVIC_Configuration();   
+    Interrupt_uart4_rx();
+    PID_Init();
+		MyGPIO_Configuration();
+    EXTI_FPGA_Pa8();
+	//Configure PD2 read width pulse CH3,  external interrput
+		//Configure_PD2_Read_Width_Pulse();
+    MyTIM_PWM_Configuration();  
+       
+    GPIO_SetBits(GPIOB,GPIO_Pin_12);
+		//Configure PB15 read width pulse CH3,  external interrput
+		Configure_PB15_Read_Width_Pulse();
+}
 void DMA_UART4_RX(uint8_t *buffer, uint16_t size)
 {
   DMA_InitTypeDef  DMA_InitStructure;

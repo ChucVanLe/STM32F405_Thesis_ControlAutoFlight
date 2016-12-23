@@ -308,11 +308,11 @@ void Gent_Pwm_Pitch(float Pitch)
 void Gent_Pwm_Yaw(float Yaw)
 {
 	int Pwm ;
-	Pwm =(int)((float)(1.5 + Yaw) * 21711 * 73 / 1000);
+	Pwm =(int)((float)(1.6 + Yaw) * 1584903 /1000);
 	//1.24 - 1.5 <= Yaw <= 1.9 - 1.5
 	//limit
-	if(Pwm > 3011) Pwm = 3011;//Pulse = 1.9ms
-	if(Pwm < 1965) Pwm = 1965;//Pulse = 1.24ms
+//	if(Pwm > 3011) Pwm = 3011;//Pulse = 1.9ms
+//	if(Pwm < 1965) Pwm = 1965;//Pulse = 1.24ms
 	TIM4->CCR4 = Pwm;
 }
 void Gent_Pwm_Alt(float Alt)
