@@ -53,14 +53,16 @@ int main(void)
 	
     while(1)
     {
-//        if (GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_8))//auto control
-//					{//test ok:21/11/2016
-//						Call_Roll_PID(Roll_PID.SetPoint);   
-//						Call_Pitch_PID(Pitch_PID.SetPoint);
-//						Call_Yaw_PID(Yaw_PID.SetPoint);
-//						//real-time
-//						Call_Alt_PID(Alt_PID.SetPoint);		
-//        }
+        if (GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_8))//auto control
+					{//test ok:21/11/2016
+						Call_Roll_PID(Roll_PID.SetPoint);   
+						Call_Pitch_PID(Pitch_PID.SetPoint);
+						//Call_Yaw_PID(Yaw_PID.SetPoint);
+						//real-time
+						Call_Alt_PID(Alt_PID.SetPoint);		
+						if(control_path_use_stanley)
+							main_control();//control flight use standley
+        }
 			//--------------------tran data to GS-------------------------------------------
 			//---------------------receive data from GS-------------------------------------
 			if(CMD_Trigger) //receive enough 1 frame command
@@ -72,8 +74,7 @@ int main(void)
 			//-------------------get current value IMU/GPS----------------------------------
 			//Anh Huan....................................................
 			gps_process();//ok: get roll, pitch, yaw, lat, long, alt,
-			if(control_path_use_stanley)
-				main_control();//control flight use standley
+
 
 			        
     }// end while

@@ -321,8 +321,8 @@ void Gent_Pwm_Alt(float Alt)
 	Pwm =(int)((float)(1.5 + Alt) * 21711 * 73 / 1000);
 	//limit
 	//1.110 - 1.5 <= Alt <= 1.92 - 1.5
-//	if(Pwm > 3043) Pwm = 3043;//Pulse = 1.92ms
-//	if(Pwm < 1759) Pwm = 1759;//Pulse = 1.110ms
+	if(Pwm > 3043) Pwm = 3043;//Pulse = 1.92ms
+	if(Pwm < 1759) Pwm = 1759;//Pulse = 1.110ms
 	//test simulate
 	if(Pwm > 2694) Pwm = 2694;//Pulse = 1.7ms
 	if(Pwm < 1759) Pwm = 1759;//Pulse = 1.110ms

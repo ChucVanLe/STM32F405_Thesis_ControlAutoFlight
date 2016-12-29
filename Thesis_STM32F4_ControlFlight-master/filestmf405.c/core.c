@@ -55,7 +55,7 @@ real64_t angle_factor=0.6;
  volatile real64_t xp, yp, pre_xp, pre_yp;
  volatile real32_t steer_angle=0.0;
  volatile real64_t angle_error=0.0;
-volatile real64_t delta_cte;
+volatile real64_t delta_cte = 0;
 #define NUM_WAYPOINT (int32_t)6
 
 WAYPOINT_STRUCT WAYPOINT_LLH[NUM_WAYPOINT] = {{ 10.772629,106.659863},
@@ -63,12 +63,12 @@ WAYPOINT_STRUCT WAYPOINT_LLH[NUM_WAYPOINT] = {{ 10.772629,106.659863},
 																					{ 10.772577,106.658852},
 																					{10.772229,106.659032}};
 //waypoint hexagon
-WAYPOINT_STRUCT WAYPOINT[NUM_WAYPOINT] = {{0, 0, 4.0, 4.0, 60.0},
-																					{0, 0, 4.0, 4.0, 60.0},
-																					{0, 0, 4.0, 4.0, 60.0},
-																					{0, 0, 4.0, 4.0, 60.0},
-																					{0, 0, 4.0, 4.0, 60.0},
-																					{0, 0, 4.0, 4.0, 60.0}};
+WAYPOINT_STRUCT WAYPOINT[NUM_WAYPOINT] = {{0, 0, 10.0, 10.0, 60.0},
+																					{0, 0, 10.0, 10.0, 60.0},
+																					{0, 0, 10.0, 10.0, 60.0},
+																					{0, 0, 10.0, 10.0, 60.0},
+																					{0, 0, 10.0, 10.0, 60.0},
+																					{0, 0, 10.0, 10.0, 60.0}};
 /* //waypoint khu cnc 79 wp
 WAYPOINT_STRUCT WAYPOINT[NUM_WAYPOINT] = {
 {275.3230, 371.4800,1.0, 1.0, 150.0},
@@ -628,10 +628,10 @@ void car_control(void)
 	
 					delta_cte = atan(kp_cte * cte + ki_cte * cteI);
 					steer_angle = (0.4*angle_error + delta_cte) * RAD2DEGREE;
-					//	if (steer_angle > 30)
-					//		steer_angle = 30;
-					//	else if (steer_angle < -30)
-					//		steer_angle = -30;
+						if (steer_angle > 30)
+							steer_angle = 30;
+						else if (steer_angle < -30)
+							steer_angle = -30;
 					//}
 				}
 				else
@@ -645,17 +645,17 @@ void car_control(void)
 					//{
 					delta_cte = atan(kp_cte * cte + ki_cte * cteI);
 					steer_angle = (0.4*angle_error + delta_cte) * RAD2DEGREE;
-					//	if (steer_angle > 30)
-					//		steer_angle = 30;
-					//	else if (steer_angle < -30)
-					//		steer_angle = -30;
+					if (steer_angle > 30)
+							steer_angle = 30;
+					else if (steer_angle < -30)
+							steer_angle = -30;
 					//}
 				}
 
 //				snprintf(debug_msg,200,"%11.3f,%11.3f,%6.2f,%11.3f,%11.3f\r\n"
 //					,xp,yp,IMUStruct.yaw,wpx1,wpx2);
 			
-				steer_angle *= K_STEER;	
+				//steer_angle *= K_STEER;	
         // Set steer angle
         //if (fabs(GPSStruct.speed) > 0.3)//is moving?
 				//{ 
