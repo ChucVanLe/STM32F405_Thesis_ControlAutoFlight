@@ -21,18 +21,18 @@ Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V2.0.18.0
 Dialog DLL:      TCM.DLL V1.14.14.0
  
 <h2>Project:</h2>
-C:\Users\Nguyen Thi Anh Ly\OneDrive\Le Van Chuc\code\ControlFlight_v4_test_standley_algorithm_UseGPS\Thesis_STM32F4_ControlFlight-master\MDK-ARM-project\crc.uvproj
+C:\Users\Nguyen Thi Anh Ly\OneDrive\Le Van Chuc\code\ControlFlight_v4_test_standley_algorithm_UseModeAutoFromRC\Thesis_STM32F4_ControlFlight-master\MDK-ARM-project\crc.uvproj
 Project File Date:  11/18/2016
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 3 (build 300)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'CRC'
-compiling ff.c...
-"no source": Error:  #5: cannot open source input file "..\Sd Card\ff.c": No such file or directory
-..\Sd Card\ff.c: 0 warnings, 1 error
 compiling fattime.c...
 "no source": Error:  #5: cannot open source input file "..\Sd Card\fattime.c": No such file or directory
 ..\Sd Card\fattime.c: 0 warnings, 1 error
+compiling ff.c...
+"no source": Error:  #5: cannot open source input file "..\Sd Card\ff.c": No such file or directory
+..\Sd Card\ff.c: 0 warnings, 1 error
 compiling ccsbcs.c...
 "no source": Error:  #5: cannot open source input file "..\Sd Card\option\ccsbcs.c": No such file or directory
 ..\Sd Card\option\ccsbcs.c: 0 warnings, 1 error
@@ -42,10 +42,16 @@ compiling luanvan3-05vs2.c...
 ..\file.h\ConnectWithGS.h(18): warning:  #1-D: last line of file ends without a newline
    
 ..\filestmf405.c\luanvan3-05vs2.c: 2 warnings, 0 errors
+compiling peripheral05.c...
+..\file.h\LL2UTM.h(18): warning:  #1-D: last line of file ends without a newline
+   
+..\file.h\ConnectWithGS.h(18): warning:  #1-D: last line of file ends without a newline
+   
+..\filestmf405.c\peripheral05.c: 2 warnings, 0 errors
 linking...
-Program Size: Code=25896 RO-data=1240 RW-data=648 ZI-data=27928  
-".\Project\crc.axf" - 0 Error(s), 2 Warning(s).
-Build Time Elapsed:  00:00:10
+Program Size: Code=25888 RO-data=1240 RW-data=648 ZI-data=27928  
+".\Project\crc.axf" - 0 Error(s), 4 Warning(s).
+Build Time Elapsed:  00:00:17
 </pre>
 </body>
 </html>

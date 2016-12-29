@@ -14,6 +14,7 @@
 	extern float	init_width_pulse_CH3;
 	uint8_t Buf_rx4[];
 	char  data_IMU_GPS_CMD_tran_GS[500], Buf_USART2_trandata_to_GS[500];//data_IMU to 100ms tran data to GS
+	extern bool switch_to_control_flight_use_standley;
 	/**************************************************************************************/
 	void Delay_100ms(void) 
 	{
@@ -491,6 +492,8 @@ void EXTI9_5_IRQHandler(void)
 		Alt_PID.PartKi = 0;
 		Alt_PID.PreError = 0;
 		Alt_PID.Pid_Result = 0;
+		//use stanley algorithm
+		switch_to_control_flight_use_standley = true;
 	/* Clear interrupt flag */
 		EXTI_ClearITPendingBit(EXTI_Line8);
 	  }

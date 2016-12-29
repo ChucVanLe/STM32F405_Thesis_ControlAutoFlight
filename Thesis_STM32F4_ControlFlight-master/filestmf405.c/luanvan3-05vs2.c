@@ -60,8 +60,9 @@ int main(void)
 						//Call_Yaw_PID(Yaw_PID.SetPoint);
 						//real-time
 						Call_Alt_PID(Alt_PID.SetPoint);		
-						if(control_path_use_stanley)
-							main_control();//control flight use standley
+						//if(control_path_use_stanley)
+						//use standley to control path when switch to auto mode
+						main_control();//control flight use standley
         }
 			//--------------------tran data to GS-------------------------------------------
 			//---------------------receive data from GS-------------------------------------
